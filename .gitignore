@@ -6,3 +6,7 @@ node_modules
 public/
 .DS_Store
 yarn-error.log
+# Vim files
+*.swo
+*.swp
+*.swm
