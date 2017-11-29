@@ -1,79 +1,68 @@
+const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require(`path`)
+
 exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   const { createNodeField } = boundActionCreators
-  let slug
-  if (node.internal.type === `MarkdownRemark`) {
-    const fileNode = getNode(node.parent)
-    const parsedFilePath = path.parse(fileNode.relativePath)
-    const splittedDir = parsedFilePath.dir.split('/')
-    // remove /backend /frontend /graphql
-    if (splittedDir.length === 2) {
-      slug = `/${splittedDir[1]}/${parsedFilePath.name}/`
-    } else if (parsedFilePath.name !== `index` && parsedFilePath.dir !== ``) {
-      slug = `/${parsedFilePath.dir}/${parsedFilePath.name}/`
-    } else if (parsedFilePath.dir === ``) {
-      slug = `/${parsedFilePath.name}/`
-    } else {
-      slug = `/${parsedFilePath.dir}/`
+  if (
+    [`MarkdownRemark`, `CustomMarkdownRemark `].indexOf(
+      node.internal.type
+    ) >= 0
+  ) {
+    if(node.internal.type === `CustomMarkdownRemark`){
+      console.log('gatsby-node.onCreateNode', node)
     }
-
+    const fileNode = getNode(node.parent)
+    const slug = createFilePath({node, getNode, basePath: 'content' })
     // Add slug as a field on the node.
-    createNodeField({ node, fieldName: `slug`, fieldValue: slug })
+    createNodeField({ node, name: `slug`, value: slug })
   }
 }
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
-
   return new Promise((resolve, reject) => {
     const pages = []
     // Query for all markdown "nodes" and for the slug we previously created.
-    resolve(
-      graphql(
-        `{
-          allMarkdownRemark {
-            edges {
-              node {
-                frontmatter {
-                  title
-                  layout
-                }
-                fields {
-                  slug
-                }
-                excerpt(pruneLength: 1000)
+    graphql(
+      `{
+        allMarkdownRemark {
+          edges {
+            node {
+              frontmatter {
+                layout
+              }
+              fields {
+                slug
               }
             }
           }
         }
-      `
-      ).then(result => {
-        if (result.errors) {
-          console.log(result.errors)
-          reject(result.errors)
-        }
-
-        // Create blog posts pages.
-        result.data.allMarkdownRemark.edges.forEach(edge => {
-          const layoutName = edge.node.frontmatter.layout || 'index'
-          createPage({
-            path: edge.node.fields.slug, // required
-            component: layout,
-            context: {
-              slug: edge.node.fields.slug,
-            },
-          })
-        })
-
-        if (process.env.NODE_ENV === 'production') {
-          try {
-            syncToAlgolia(result.data)
-          } catch (e) {
-            console.log('Warning: Algolia Error')
-          }
-        }
-
+      }
+    `
+    ).then(result => {
+      if (result.errors) {
+        console.log("createPages: Error(s) occured while querying markdown files")
+        result.errors.forEach(err => console.error(err))
+        reject(result.errors)
         return
+      }
+
+      // Create blog posts pages.
+      result.data.allMarkdownRemark.edges.forEach(edge => {
+        const layoutName = edge.node.frontmatter.layout || 'index'
+        const component = path.resolve(`${__dirname}/src/templates/page.js`)
+        createPage({
+          path: edge.node.fields.slug, // required
+          component,
+          layout: layoutName,
+          context: {
+            slug: edge.node.fields.slug,
+          },
+        })
       })
-    )
+      resolve()
+    })
   })
 }
+
+
