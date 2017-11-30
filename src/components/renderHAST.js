@@ -1,8 +1,6 @@
 import React, { createElement } from 'react'
 import PropTypes from 'prop-types' 
 
-const Wrapper = (props) => (<span {...props} />)
-
 const renderAST = ({ hast, componentsMap }) => {
   const renderTag = ({ type, tagName, properties, value, children=[]}) => {
     let elem
