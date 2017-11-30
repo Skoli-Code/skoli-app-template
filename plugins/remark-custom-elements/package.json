@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@dumpster/remark-custom-element-to-hast": "^0.3.0",
-    "graphql-type-json": "^0.1.4"
+    "graphql-type-json": "^0.1.4",
+    "remark-frontmatter": "^1.1.0"
   }
 }

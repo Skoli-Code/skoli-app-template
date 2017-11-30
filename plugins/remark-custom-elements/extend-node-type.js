@@ -2,13 +2,12 @@ const parse = require('remark-parse')
 const customParser = require('@dumpster/remark-custom-element-to-hast')
 const GraphQLJSON = require('graphql-type-json')
 const unified = require('unified')
+const frontmatter = require('remark-frontmatter')
 
 const {
   GraphQLObjectType,
   GraphQLList,
   GraphQLString,
-  GraphQLInt,
-  GraphQLEnumType,
 } = require(`graphql`)
 
 const getPropTypes = ({ components }) => new GraphQLObjectType({
@@ -26,10 +25,10 @@ const getPropTypes = ({ components }) => new GraphQLObjectType({
   })(components)
 })
 
-
+// returns GraphQLObjectType of every markdown hast node
 const MarkdownAstObject = ({ PropTypes, depth = 0}) => {
   const conf =  {
-    name: `ast_${depth}`,
+    name: `hast_${depth}`,
     fields: {
       type: { type: GraphQLString },
       value: { type: GraphQLString },
@@ -37,7 +36,8 @@ const MarkdownAstObject = ({ PropTypes, depth = 0}) => {
       properties: { type: GraphQLJSON },
     }
   }
-  if(depth < 1) {
+  // depth limit to avoid infinite recursion
+  if(depth < 2) {
     conf.fields.children = {
       type: new GraphQLList(MarkdownAstObject({
         PropTypes, depth: depth+1 
@@ -46,7 +46,7 @@ const MarkdownAstObject = ({ PropTypes, depth = 0}) => {
   } else {
     conf.fields.children = {
       type: new GraphQLList(new GraphQLObjectType({
-        name: `ast_${depth}_child`,
+        name: `hast_${depth}_child`,
         fields: {
           type: { type: GraphQLString },
           value: { type: GraphQLString },
@@ -63,25 +63,22 @@ module.exports = ({
   pathPrefix,
   type 
 } , options) => {
+  // we only extend nodes created by gatsby-transformer-remark
   if (type.name !== `MarkdownRemark`) { return {} }
-  console.log(
-    'remark-custom-elements/extend-node-type', 'In promise !'
-  )
   function parseElements(node){
-    const ast = unified()
+    const hast = unified()
         .use(parse)
+        .use(frontmatter, ['yaml'])
         .use(customParser, {
           whitelist: options.components.map(({ name }) => name) 
         })
         .processSync(node.internal.content).contents
-
-    console.log('parseElements AST = ', ast)
-    return ast 
+    return hast
   }
   const PropTypes = getPropTypes(options)
   const MarkdownObject = MarkdownAstObject({ PropTypes })
   const RootType = new GraphQLObjectType({
-    name: `ast`,
+    name: `hast`,
     fields: {
       type: { type: GraphQLString },
       children: {
@@ -91,12 +88,9 @@ module.exports = ({
   })
 
   return {
-    ast: {
+    hast: {
       type: RootType,
       resolve(node){
-        console.log(
-          'remark-custom-elements/extend-node-type/astRoot/resolve'
-        )
         return parseElements(node)
       }
     }

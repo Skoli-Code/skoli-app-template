@@ -5,6 +5,7 @@ layout: index
 
 # À Propos
 
+Test de note: <Note content="ceci devrait être affiché"><Strong>Super test</Strong> avec du contenu dedans</Note>
 
 La grande porte s’ouvrit lourdement en coulissant sur le côté gauche sans faire le moindre bruit. Derrière la porte, une nouvelle route, éclairée par de multiples projecteurs accrochés de chaque côtés, s’enfonçait dans les profondeurs de cet ouvrage. Cette route était faite de zigzag incessant, certainement pour empêcher le souffle d’une bombe atomique pensa David.
 
