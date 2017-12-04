@@ -5,16 +5,11 @@ import Note from '../components/Note'
 import Ref from '../components/Ref'
 
 // wrapper to register notes
-import ContentBottomBarWrapper from '../components/ContentBottomBarWrapper' 
-
-const Strong = styled.span`
-  font-weight: bold
-`
+import WatchScrollContent from '../components/WatchScrollContent' 
 
 const componentsMap = {
-  strong: Strong,
-  note: Note,
-  ref: Ref,
+  Note,
+  Ref,
 }
 
 const Holder = styled.div``;
@@ -23,9 +18,9 @@ const DefaultTemplate = ({ data }) => {
   const props = { hast, componentsMap }
   return (
     <Holder>
-      <ContentBottomBarWrapper>
+      <WatchScrollContent>
         <HAST {...props} />
-      </ContentBottomBarWrapper>
+      </WatchScrollContent>
     </Holder>
   )
 }
