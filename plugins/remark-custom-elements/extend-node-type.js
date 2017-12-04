@@ -37,7 +37,7 @@ const MarkdownAstObject = ({ PropTypes, depth = 0}) => {
     }
   }
   // depth limit to avoid infinite recursion
-  if(depth < 2) {
+  if(depth < 4) {
     conf.fields.children = {
       type: new GraphQLList(MarkdownAstObject({
         PropTypes, depth: depth+1 
@@ -70,9 +70,11 @@ module.exports = ({
         .use(parse)
         .use(frontmatter, ['yaml'])
         .use(customParser, {
-          whitelist: options.components.map(({ name }) => name) 
+          componentWhitelist: options.components.map(({ name }) => name) 
         })
         .processSync(node.internal.content).contents
+
+    console.log('hast', JSON.stringify(hast, null, 2))
     return hast
   }
   const PropTypes = getPropTypes(options)

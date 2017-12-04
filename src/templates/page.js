@@ -44,6 +44,16 @@ export const query = graphql`
             tagName
             properties
             value
+            children {
+              type
+              tagName
+              properties
+              value
+              children {
+                type
+                value
+              }
+            }
           }
         }
       }
