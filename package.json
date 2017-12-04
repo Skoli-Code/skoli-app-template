@@ -12,7 +12,7 @@
     "gatsby-transformer-remark": "^1.7.22",
     "graphql": "^0.11.7",
     "prop-types": "^15.6.0",
-    "react-scroll": "^1.6.7",
+    "react-waypoint": "^7.3.1",
     "styled-components": "^2.2.3"
   },
   "keywords": [
