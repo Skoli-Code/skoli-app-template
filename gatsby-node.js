@@ -50,7 +50,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       // Create blog posts pages.
       result.data.allMarkdownRemark.edges.forEach(edge => {
         const layoutName = edge.node.frontmatter.layout || 'index'
-        const component = path.resolve(`${__dirname}/src/templates/page.js`)
+        const component = path.resolve(`${__dirname}/src/templates/markdown-page.js`)
         createPage({
           path: edge.node.fields.slug, // required
           component,

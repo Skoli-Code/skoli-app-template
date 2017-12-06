@@ -24,7 +24,7 @@ const Header = () => (
             textDecoration: 'none',
           }}
         >
-          Gatsby
+          Skoli App Template 
         </Link>
       </h1>
     </div>

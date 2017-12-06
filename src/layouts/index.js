@@ -1,25 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import styled from 'styled-components'
-import './index.css'
+import styled, { ThemeProvider } from 'styled-components'
 
 import Container from '../components/Container'
-import Header from '../components/Header'
+import { SOCIAL } from '../constants'
+import theme from '../theme'
+import './index.css'
+
+const {
+  TITLE,
+  DESCRIPTION,
+  KEYWORDS
+} = SOCIAL
 
 const TemplateWrapper = ({ children }) => (
   <div>
     <Helmet
-      title="Gatsby Default Starter"
+      title={ TITLE }
       meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
+        { name: 'description', content: DESCRIPTION },
+        { name: 'keywords', content: KEYWORDS  },
       ]}
     />
-    <Header />
-    <Container>
+    <ThemeProvider theme={theme}>
       {children()}
-    </Container>
+    </ThemeProvider>
   </div>
 )
 

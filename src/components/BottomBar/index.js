@@ -7,8 +7,8 @@ const BottomBar = styled.div`
   padding-top: 5px;
   background: white;
   position: fixed;
-  height: 200px;
-  bottom: ${({ visible }) => visible ? 0 : -200}px;
+  height: 165px;
+  bottom: ${({ visible }) => visible ? 0 : -165}px;
   left: 0;
   right: 0;
   transition: bottom .3s ease;

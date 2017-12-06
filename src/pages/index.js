@@ -1,13 +1,21 @@
 import React from 'react'
-import Link from 'gatsby-link'
-import Cover from '../layouts/cover'
+import styled from 'styled-components'
 
+import Button from '../components/Button'
+import Cover from '../templates/cover'
+
+const CoverTitle = styled.h1`
+  font-size: 64px
+`
 const IndexPage = () => (
   <Cover>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
+    <CoverTitle>
+      Skoli application template
+    </CoverTitle>
+    <p>
+      This is an example
+    </p>
+    <Button to="/introduction">GO</Button> 
   </Cover>
 )
 

@@ -42,32 +42,47 @@ class RenderAST extends Component {
       ...BaseComponents,
       ...componentsMap
     }
-
-    console.log('renderAST', hast, components)
-    const renderTag = ({ type, tagName, properties, value, children=[]}) => {
+    
+    const renderTag = ({ type, tagName, properties, value, children=[], depth=0, index=0}) => {
       let elem
-      const props = properties || {}
+      const key = `${tagName||type}-${depth}-${index}`
+      const props = {
+        key,
+        ...properties,
+      }
+      
       if (type === 'element') {
         const Tag = components[tagName]
         if(Tag) { 
           elem = (
             <Tag {...props}>
-              { children.length > 0 && children.map(renderTag) }
-              { value && (<span>{ value }</span>) }
+              { children.length > 0 && renderChildren(children, depth)}
+              { value && (<span key={ key }>{ value }</span>) }
             </Tag>
           )
         } else {
-          return createElement(tagName, props, children.map(renderTag))
+          return createElement(tagName, props, renderChildren(children, depth))
         }
       } else {
-        elem = <span>{ value }</span>
+        elem = <span key={ key }>{ value }</span>
       }
       return elem
     }
 
+    const renderChildren = (children, depth=0) => (
+      children.map((elem, i) => {
+        const props = {
+          ...elem,
+          depth: depth+1,
+          index: i
+        }
+        return renderTag(props)
+      })
+    )
+
     return (
       <div>
-        { hast.children.map(renderTag) }
+        { renderChildren(hast.children) }
       </div>
     )
   }

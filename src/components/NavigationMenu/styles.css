@@ -1,0 +1,25 @@
+.menu-holder {
+  transition: transform .4s ease-in;
+  transform: translate(2000px, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  color: white;
+  /*background-color: rgb(152, 143, 134);/* PANTONE WARM GREY 7 C */
+  background-color: black;
+}
+.menu-holder .Dropdown-control {
+  width: 100%;
+}
+
+.menu .menu-icon {
+  z-index: 10;
+  position: absolute;
+  right: 0;
+}
+.menu--opened .menu-holder {
+  transform: translate(0, 0);
+}
