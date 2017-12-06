@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@dumpster/remark-custom-element-to-hast@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@dumpster/remark-custom-element-to-hast/-/remark-custom-element-to-hast-0.3.0.tgz#da089cdec7f32e9013ece1f48844207f19ebcbfb"
+"@dumpster/remark-custom-element-to-hast@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@dumpster/remark-custom-element-to-hast/-/remark-custom-element-to-hast-0.4.0.tgz#e305aa34855fb15f796c226027052075bf0755ef"
   dependencies:
     hast-util-raw "^2.0.1"
     mdast-util-to-hast "^2.1.1"

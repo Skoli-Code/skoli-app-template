@@ -13,19 +13,23 @@ const TabLink = Link.extend`
   height: ${size('navbarHeight')};
   line-height: ${size('navbarHeight')};
   display: flex;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: transparent;
   transition: color .3s ease, background-color .3s ease;
 
   ${ifProp('home', css`
     color: ${palette('gray', 0)};
     background-color: ${palette('white', 0)};
+
+    svg {
+      height: 40px !important;
+      width: 40px !important;
+    }
   `)}
 
   &:hover {
-    color: ${palette('primary', 0)};
-    background-color: ${palette('white', 0)};
+    background-color: ${palette('primary', 0)};
   }
 
   svg {

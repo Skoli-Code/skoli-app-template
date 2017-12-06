@@ -30,7 +30,7 @@ const tabs = [{
 
 const Holder = styled.div`
   height: ${size('navbarHeight')};
-  background-color: ${palette('primary', 0)}
+  background-color: ${palette('primary', 1)}
 `
 
 const Navbar = () => (
