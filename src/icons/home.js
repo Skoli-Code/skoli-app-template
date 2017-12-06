@@ -3,7 +3,7 @@ import Icon from './icon'
 
 // Home by Landan Lloyd from the Noun Project
 const Home = (props) => (
-  <Svg
+  <Icon
     viewBox="0 0 100 100"
     {...props}
   >
@@ -14,7 +14,7 @@ const Home = (props) => (
         />
       </g>
     </g>
-  </Svg>
+  </Icon>
 )
 
 export default Home

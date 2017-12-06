@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Svg from 'components/atoms/Svg';
+import Icon from './icon';
 
 import './styles.css';
 
@@ -10,7 +10,7 @@ const OpenIcon = ({
   height,
   ...props
 }) => (
-  <Svg
+  <Icon
     className={
       'open-icon '+(visible?'open-icon--visible':'')
     }
@@ -32,7 +32,7 @@ const OpenIcon = ({
     <g transform="matrix( 1, 0, 0, 1, 0,0)">
       <path id="a" stroke="#ffffff" strokeWidth="12" strokeLinejoin="round" strokeLinecap="square" fill="none" d=" M 20 70 L 80 70"/>
     </g>
-  </Svg>
+  </Icon>
 );
 
 const CloseIcon = ({
@@ -41,7 +41,7 @@ const CloseIcon = ({
   height,
   ...props
 }) => (
-  <Svg
+  <Icon
     width={width}
     height={height}
     className={
@@ -52,7 +52,7 @@ const CloseIcon = ({
     y="0px"
   >
     <polygon points="74.16 34.33 65.67 25.84 50 41.52 34.33 25.84 25.84 34.33 41.52 50 25.84 65.67 34.33 74.16 50 58.48 65.67 74.16 74.16 65.67 58.48 50 74.16 34.33"/>
-  </Svg>
+  </Icon>
 );
 
 const MenuIcon = ({

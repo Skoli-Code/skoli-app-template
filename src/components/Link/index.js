@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import GatsbyLink from 'gatsby-link'
 
 const Link = styled(
-  ({ to, href, children, ...otherProps }) => {
+  ({ to, href, children, home, ...otherProps }) => {
     let $link
     if(href){
       to = href

@@ -1,4 +1,6 @@
 import React from 'react'
+import { size } from 'styled-theme'
+
 import FacebookProvider, { Share } from 'react-facebook'
 import { SOCIAL } from '../constants'
 import { getTwitterShareHREF, openModal } from '../utils'
@@ -16,7 +18,7 @@ const shareTwitter = () => {
 
 const Holder = styled.div`
   display: flex;
-  height: ${size('navbar.height')};
+  height: ${size('navbarHeight')};
   justify-content: space-around;
   align-items: center;
   padding: 0 50px;

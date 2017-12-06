@@ -1,8 +1,9 @@
 import styled from 'styled-components'
+import { size } from 'styled-theme'
 
 const Container = styled.div`
   margin: 0 auto;
-  max-width: 960px;
+  max-width: ${size('containerMaxWidth')};
   padding: 0px 1.0875rem 1.45rem;
   padding-top: 0;
 `

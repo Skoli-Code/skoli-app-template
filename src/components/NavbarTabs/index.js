@@ -1,47 +1,39 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { ifProp } from 'styled-tools'
-import { palette } from 'styled-theme'
+import { palette, size } from 'styled-theme'
 import Link from '../Link' 
 
-import HomeIcon from '../../icons/home.svg'
-import AboutIcon from '../../icons/home.svg'
-import TestIcon from '../../icons/home.svg'
-import RandomPage from '../../icons/random.svg'
-
-const tabs = [{
-    home: true,
-    icon: HomeIcon,
-    to: '/',
-    text: 'Skoli app template'
-  },
-  {
-    to: '/vis-in-md',
-    text: 'Test visualization in markdown',
-  },
-  {
-    to: '/about',
-    text: 'About',
-    icon: AboutIcon,
-  }
-]
-
-const Tabs = styled.ul`
-  margin0;
-  padding:0;
-  list-style:none;
+const Tabs = styled.div`
+  display: flex;
 `
 
 const TabLink = Link.extend`
-  color: white;
-  
+  color: white; 
+  height: ${size('navbarHeight')};
+  line-height: ${size('navbarHeight')};
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: transparent;
+  transition: color .3s ease, background-color .3s ease;
+
   ${ifProp('home', css`
-    color: ${palette('gray', 0)}
-    background-color: ${palette('white',0)};
+    color: ${palette('gray', 0)};
+    background-color: ${palette('white', 0)};
   `)}
 
   &:hover {
-    color: ${color('primary
+    color: ${palette('primary', 0)};
+    background-color: ${palette('white', 0)};
+  }
+
+  svg {
+    align-self: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 5px;
+    max-height: 30px;
   }
 `
 
@@ -52,12 +44,10 @@ const Tab = ({ to, text, icon:TabIcon, home=false }) => (
   </TabLink>
 )
 
-const NavbarTabs = () => (
+const NavbarTabs = ({ tabs }) => (
   <Tabs>
-    { tabs.map(tab => (
-      <Tab {...tab} />
-    ))}
+    { tabs.map((tab,i) => <Tab key={`tab-${i}`} {...tab} /> )}
   </Tabs>
 )
 
-export NavbarTabs
+export default NavbarTabs
