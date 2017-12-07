@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Button from '../components/Button'
 import Cover from '../templates/cover'
+import coverImage from '../../images/cover.jpg'
 
 const CoverTitle = styled.h1`
   font-size: 64px
@@ -12,7 +13,7 @@ const TextAlignCenter = styled.div`
 `
 
 const IndexPage = () => (
-  <Cover>
+  <Cover background={ coverImage } blur={10}>
     <CoverTitle>
       Skoli application template
     </CoverTitle>

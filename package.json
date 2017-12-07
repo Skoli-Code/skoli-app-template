@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@dumpster/remark-custom-element-to-hast": "^0.4.0",
+    "graphql-type-json": "^0.1.4",
+    "remark-frontmatter": "^1.1.0",
     "gatsby": "^1.9.119",
     "gatsby-link": "^1.6.30",
     "gatsby-plugin-react-helmet": "^1.0.8",

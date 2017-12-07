@@ -11,6 +11,7 @@ const componentsMap = {
 }
 
 const Template = ({ data }) => {
+  console.log('markdown-page data', data)
   const { hast } = data.markdownRemark
   const props = { hast, componentsMap }
   return (
