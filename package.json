@@ -4,9 +4,8 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "@dumpster/remark-custom-element-to-hast": "^0.4.0",
-    "graphql-type-json": "^0.1.4",
-    "remark-frontmatter": "^1.1.0",
+    "@dumpster/remark-custom-element-to-hast": "^0.5.3",
+    "d3": "^4.12.0",
     "gatsby": "^1.9.119",
     "gatsby-link": "^1.6.30",
     "gatsby-plugin-react-helmet": "^1.0.8",
@@ -14,8 +13,11 @@
     "gatsby-source-filesystem": "^1.5.9",
     "gatsby-transformer-remark": "^1.7.22",
     "graphql": "^0.11.7",
+    "graphql-type-json": "^0.1.4",
     "prop-types": "^15.6.0",
+    "react-d3": "^0.4.0",
     "react-waypoint": "^7.3.1",
+    "remark-frontmatter": "^1.1.0",
     "styled-components": "^2.2.3",
     "styled-theme": "^0.3.3",
     "styled-tools": "^0.2.2"

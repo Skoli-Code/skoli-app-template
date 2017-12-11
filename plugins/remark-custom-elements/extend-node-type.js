@@ -10,23 +10,8 @@ const {
   GraphQLString,
 } = require(`graphql`)
 
-const getPropTypes = ({ components }) => new GraphQLObjectType({
-  name: `properties`,
-  fields: (components => {
-    const _f = {}
-    components.forEach(({ properties }) => {
-      properties.forEach(props => (
-        Object.keys(props).forEach(key => {
-          _f[key] = { type: props[key] }
-        })
-      ))
-    })
-    return _f
-  })(components)
-})
-
 // returns GraphQLObjectType of every markdown hast node
-const MarkdownAstObject = ({ PropTypes, depth = 0}) => {
+const MarkdownAstObject = ({ depth = 0}) => {
   const conf =  {
     name: `hast_${depth}`,
     fields: {
@@ -40,7 +25,7 @@ const MarkdownAstObject = ({ PropTypes, depth = 0}) => {
   if(depth < 4) {
     conf.fields.children = {
       type: new GraphQLList(MarkdownAstObject({
-        PropTypes, depth: depth+1 
+        depth: depth+1 
       }))
     }
   } else {
@@ -70,15 +55,14 @@ module.exports = ({
         .use(parse)
         .use(frontmatter, ['yaml'])
         .use(customParser, {
-          componentWhitelist: options.components.map(({ name }) => name) 
+          componentWhitelist: options.components 
         })
         .processSync(node.internal.content).contents
 
     console.log('hast', JSON.stringify(hast, null, 2))
     return hast
   }
-  const PropTypes = getPropTypes(options)
-  const MarkdownObject = MarkdownAstObject({ PropTypes })
+  const MarkdownObject = MarkdownAstObject({})
   const RootType = new GraphQLObjectType({
     name: `hast`,
     fields: {

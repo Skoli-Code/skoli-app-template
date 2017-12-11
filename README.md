@@ -19,6 +19,10 @@ $ yarn develop
 # OR (if gatsby is globally installed)
 $ gatsby develop
 ```
+## Components inside markdown
+In order to make custom components inside markdown 2 things must be done:
+- add the component inside `remark-custom-elements` plugin configuration (`gatsby-config.js`)
+- import & add the component inside the `componentMap` (`src/templates/markdown-page.js``)
 
 ## Notes and references 
 Notes and references are two different things. Notes are designed to contextualize a term, 

@@ -9,16 +9,7 @@ const {
 const customComponentsPlugin = {
   resolve: `remark-custom-elements`,
   options: {
-    components: [
-      {
-        name: 'Note',
-        properties: [{ content: GraphQLString }]
-      },
-      {
-        name: 'Ref',
-        properties: [{ reference: GraphQLString }]
-      }
-    ]
+    components: [ 'Note', 'Ref', 'BarChart' ]
   }
 }
 

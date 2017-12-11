@@ -25,10 +25,11 @@ const TabLink = Link.extend`
     svg {
       height: 40px !important;
       width: 40px !important;
+      max-height: 40px !important;
     }
   `)}
 
-  &:hover {
+  &:hover, &.active {
     background-color: ${palette('primary', 0)};
   }
 
@@ -42,7 +43,7 @@ const TabLink = Link.extend`
 `
 
 const Tab = ({ to, text, icon:TabIcon, home=false }) => (
-  <TabLink to={ to } home={ home }>
+  <TabLink to={ to } home={ home } activeClassName={'active'} exact>
     { TabIcon && (<TabIcon />) }
     { text } 
   </TabLink>

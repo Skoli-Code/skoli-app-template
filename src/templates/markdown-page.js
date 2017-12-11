@@ -4,14 +4,15 @@ import HAST from '../components/renderHAST'
 
 import Note from '../components/Note'
 import Ref from '../components/Ref'
+import BarChart from '../components/BarChart'
 
 const componentsMap = {
   Note,
   Ref,
+  BarChart,
 }
 
 const Template = ({ data }) => {
-  console.log('markdown-page data', data)
   const { hast } = data.markdownRemark
   const props = { hast, componentsMap }
   return (

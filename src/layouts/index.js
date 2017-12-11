@@ -6,6 +6,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import Container from '../components/Container'
 import { SOCIAL } from '../constants'
 import theme from '../theme'
+
 import './index.css'
 
 const {

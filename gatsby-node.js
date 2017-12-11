@@ -65,4 +65,12 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   })
 }
 
+// fixes d3 import error
+// src: https://github.com/gatsbyjs/gatsby/issues/2107#issuecomment-342875170
+exports.modifyWebpackConfig = ({ config, stage }) => {
+  config.merge({
+     node: { fs: 'empty', child_process: 'empty' },
+  })
 
+  return config;
+};

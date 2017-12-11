@@ -1,11 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Waypoint from 'react-waypoint';
+
+import NoteModal from '../NoteModal'
 import { hash } from '../../utils' 
 
 class Note extends Component {
   static contextTypes = {
     scrollWatcher: PropTypes.object,
+  }
+
+  static defaultProps = {
+    watchScroll: true
+  }
+
+  constructor(props){
+    super(props)
+    this.state = {
+      noteOpened: false
+    }
+  }
+  
+  openNote(){
+    this.setState({ noteOpened: true })
+  }
+
+  closeNote(){
+    this.setState({ noteOpened: false })
   }
 
   onEnter(){
@@ -20,19 +41,30 @@ class Note extends Component {
   }
 
   render(){
-    const { content, children } = this.props
+    const { watchScroll, content, children } = this.props
+    const { noteOpened } = this.state
     this.hash = ~hash(content.substring(0,20)) + ''
-    return (
-      <Waypoint 
-        key={this.hash}
-        onEnter={() => this.onEnter()}
-        onLeave={() => this.onLeave()}
-        topOffset={-100}
-        bottomOffset={-200}
-        >
-        <span>{ content }</span>
-      </Waypoint>
-    )
+    const noteContent = (<span>
+        <a onClick={()=>this.openNote()}>{ content }</a>
+        <NoteModal isOpen={noteOpened} hash={hash}>
+          { children }
+        </NoteModal>
+    </span>)
+    if(watchScroll){
+      return (
+        <Waypoint 
+          key={this.hash}
+          onEnter={() => this.onEnter()}
+          onLeave={() => this.onLeave()}
+          topOffset={-100}
+          bottomOffset={-200}
+          >
+          { noteContent }
+        </Waypoint>
+      )
+    } else {
+      return noteContent
+    }
   }
 }
 
