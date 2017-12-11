@@ -2,7 +2,6 @@
 title: "À propos"
 layout: index
 ---
-
 # À Propos
 
 Test de note: <Note content="ceci devrait être affiché">**Super test** avec du contenu dedans</Note>
