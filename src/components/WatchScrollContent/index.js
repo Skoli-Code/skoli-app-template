@@ -25,8 +25,8 @@ class WatchScrollContent extends Component {
   constructor(props){
     super(props)
     this.state = {
-      visibleNotes: {},
-      visibleRefs: {},
+      notes: {},
+      refs: {},
       isNoteModalOpen: false,
       noteModalContent: null
     }
@@ -49,30 +49,58 @@ class WatchScrollContent extends Component {
   }
 
   addNote(key, content){
-    const { visibleNotes } = this.state
-    visibleNotes[key] = content
-    this.setState({ visibleNotes })
-  }
-  
-  removeNote(key){
-    const { visibleNotes } = this.state
-    if(visibleNotes[key]){
-      delete visibleNotes[key]
-    }
-    this.setState({ visibleNotes })
+    const { notes } = this.state
+    const notesNumber = Object.keys(notes).length
+    const letter = String.fromCharCode(97 + notesNumber)
+    notes[key] = { content, letter, visible: false }
+    this.setState({ notes })
+    return notes[key]
   }
 
-  componentDidMount(){
+  showNote(key){
+    const { notes } = this.state
+    const note = notes[key]
+    note.visible = true
+    this.setState({ notes })
+  }
+
+  hideNote(key){
+    const { notes } = this.state
+    const note = notes[key]
+    note.visible = false 
+    this.setState({ notes })
   }
   
+  showRef(key){
+    const { refs } = this.state
+    const ref = refs[key]
+    ref.visible = true
+    this.setState({ refs })
+  }
+
+  hideRef(key){
+    const { refs } = this.state
+    const ref = refs[key]
+    ref.visible = false
+    this.setState({ refs })
+  }
+  
+  
+  componentDidMount(){
+  }
+
+  visibleCollection(collection){
+    return Object.keys(collection)
+      .map(key => collection[key])
+      .filter(element => element.visible)
+  }
+
   visibleNotes(){
-    const { visibleNotes } = this.state
-    return Object.keys(visibleNotes).map(key => ({ key, content: visibleNotes[key] }))
+    return this.visibleCollection(this.state.notes)
   }
 
   visibleRefs(){
-    const { visibleRefs } = this.state
-    return Object.keys(visibleRefs).map(key => ({ key, content: visibleRefs[key] }))
+    return this.visibleCollection(this.state.refs)
   }
 
   render(){

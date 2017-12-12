@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Waypoint from 'react-waypoint';
 import styled from 'styled-components';
+
 import NoteModal from '../NoteModal'
 import { hash } from '../../utils' 
 
@@ -43,21 +44,30 @@ class Note extends Component {
   onEnter(){
     const { content } = this.props
     const { scrollWatcher } = this.context
-    scrollWatcher.addNote(this.hash, content)
+    scrollWatcher.showNote(this.hash)
   }
 
   onLeave(){
     const { scrollWatcher } = this.context
-    scrollWatcher.removeNote(this.hash)
+    scrollWatcher.hideNote(this.hash)
   }
 
   render(){
     const { watchScroll, content, children } = this.props
     const { noteOpened } = this.state
     this.hash = ~hash(content.substring(0,20)) + ''
-    const noteContent = (<Holder>
-        <a onClick={()=>this.openNote()}>{ content }</a>
-    </Holder>)
+    const { letter } = this.watcher().addNote(this.hash, content)
+    const noteContent = (
+      <Holder>
+        { !watchScroll && (<span>{ letter }.&nbsp;</span>)}
+        <a onClick={()=>this.openNote()}>
+          { content }
+          { watchScroll && (
+            <sup>{ letter }</sup>
+          )}
+        </a>
+      </Holder>
+    )
     if(watchScroll){
       return (
         <Waypoint 

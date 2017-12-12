@@ -35,12 +35,11 @@ const ContentBottomBar = ({ notes, refs }) => (
   <BottomBar visible={ (notes.length + refs.length) > 0 }>
     <Container>
       <List>
-        { notes.map(({ key, content, children }) => (
-          <ListElem>
+        { notes.map(({ letter, content, children }) => (
+          <ListElem key={`note-${letter}`}>
             <Note watchScroll={false} content={content}>
               { children } 
             </Note>
-            
           </ListElem>
         ))}
       </List>
