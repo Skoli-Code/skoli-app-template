@@ -50,10 +50,11 @@ class WatchScrollContent extends Component {
 
   addNote(key, content){
     const { notes } = this.state
+    if(notes[key]){ return notes[key] }
     const notesNumber = Object.keys(notes).length
     const letter = String.fromCharCode(97 + notesNumber)
     notes[key] = { content, letter, visible: false }
-    this.setState({ notes })
+    this.state.notes = notes
     return notes[key]
   }
 
@@ -70,7 +71,13 @@ class WatchScrollContent extends Component {
     note.visible = false 
     this.setState({ notes })
   }
-  
+  addRef(key, content){
+    const { refs } = this.state
+    if(refs[key]){ return refs[key] }
+    const number = Object.keys(refs).length + 1
+    refs[key] = { number, content, visible: false }
+    this.state.refs = refs
+  } 
   showRef(key){
     const { refs } = this.state
     const ref = refs[key]
