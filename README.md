@@ -1,17 +1,20 @@
 # Skoli app template
 Simple application template based on [Gatsby][gatsby].
 
+- [Features](#features)
+- [Install](#install)
+
 ## Features
 - Markdown based content (see `content/`)
 - Custom components in Markdown thanks to [remark-jsx][rjsx] 
 - Static SEO & social sharing meta data generation based on frontmatter (check a `.md` file in `content/`)
 - [Note & Reference system](#notes-and-references)
 
-## Install dependencies
+## Install
 ```sh
 $ npm install
 ```
-## Run the application in local
+## Run the application
 ```sh
 $ npm run develop
 # OR 
@@ -19,6 +22,17 @@ $ yarn develop
 # OR (if gatsby is globally installed)
 $ gatsby develop
 ```
+
+## Deploy 
+By default this application is configured to be deployed on GitHub pages. To deploy the application simply run:
+```sh
+$ npm run deploy
+# OR
+$ yarn deploy
+```
+
+Other solutions can be configured (like [surge.sh](http://surge.sh)). To do that change the `deploy` script configured in `package.json` with the static hosting service of your choice.
+
 ## Add a page
 2 kind of pages are possible:
 - markdown-based pages
@@ -46,9 +60,10 @@ To add your newly created page to the navigation bar you must configure a new li
 You'll see there a `NAVBAR_LINKS` constant that's designed to hold the navigation bar links configuration.
 Please note that the links are based on the page's filename. So if you want a different link, just
 rename the file and update the link in `NAVBAR_LINKS`.
+
 ```js
 import CustomIcon from 'icons/custom'
-const NAVBAR_LINKS = [
+export const NAVBAR_LINKS = [
   // ...
   {
     to: '/custom-page',
@@ -58,6 +73,9 @@ const NAVBAR_LINKS = [
   },
 ]
 ```
+
+## Theme 
+
 
 ## Components inside markdown
 In order to make custom components inside markdown 2 things must be done:
