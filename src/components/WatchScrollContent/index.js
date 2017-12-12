@@ -8,9 +8,10 @@ import styled from 'styled-components'
 import BottomBar from '../BottomBar'
 import NoteModal from '../NoteModal'
 
+import { sleep } from '../../utils'
+
 const ScrollWrapper = styled.div``
 const Content = styled.div``
-
 
 class WatchScrollContent extends Component {
   static childContextTypes = {
@@ -25,7 +26,9 @@ class WatchScrollContent extends Component {
     super(props)
     this.state = {
       visibleNotes: {},
-      visibleRefs: {}
+      visibleRefs: {},
+      isNoteModalOpen: false,
+      noteModalContent: null
     }
   }
 
@@ -41,6 +44,7 @@ class WatchScrollContent extends Component {
   }
 
   closeNoteModal(){
+    console.log('closeNoteModal !')
     this.setState({ isNoteModalOpen: false })
   }
 
@@ -73,7 +77,7 @@ class WatchScrollContent extends Component {
 
   render(){
     const { children } = this.props
-    const { isNoteModalOpen } = this.state
+    const { isNoteModalOpen, noteModalContent } = this.state
     const refs = this.visibleRefs()
     const notes = this.visibleNotes()
     const bottomBarProps = { refs, notes }
@@ -83,7 +87,7 @@ class WatchScrollContent extends Component {
           { children }
         </Content>
         <BottomBar {...bottomBarProps}/>
-        <NoteModal isOpen={isNoteModalOpen} content={content}/>
+        <NoteModal isOpen={isNoteModalOpen} content={noteModalContent}/>
       </ScrollWrapper>
     )
   }

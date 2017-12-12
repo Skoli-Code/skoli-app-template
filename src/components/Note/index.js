@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Waypoint from 'react-waypoint';
-
+import styled from 'styled-components';
 import NoteModal from '../NoteModal'
 import { hash } from '../../utils' 
+
+const Holder = styled.span`
+  font-weight: bold;
+  cursor: pointer;
+`
 
 class Note extends Component {
   static contextTypes = {
@@ -50,9 +55,9 @@ class Note extends Component {
     const { watchScroll, content, children } = this.props
     const { noteOpened } = this.state
     this.hash = ~hash(content.substring(0,20)) + ''
-    const noteContent = (<span>
+    const noteContent = (<Holder>
         <a onClick={()=>this.openNote()}>{ content }</a>
-    </span>)
+    </Holder>)
     if(watchScroll){
       return (
         <Waypoint 
