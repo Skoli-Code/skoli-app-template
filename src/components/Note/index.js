@@ -21,8 +21,14 @@ class Note extends Component {
     }
   }
   
+  watcher(){
+    return this.context.scrollWatcher
+  }
+
   openNote(){
-    this.setState({ noteOpened: true })
+    const watcher = this.watcher()
+    watcher.setNoteModalContent(this.props.children)
+    watcher.openNoteModal()
   }
 
   closeNote(){
@@ -46,9 +52,6 @@ class Note extends Component {
     this.hash = ~hash(content.substring(0,20)) + ''
     const noteContent = (<span>
         <a onClick={()=>this.openNote()}>{ content }</a>
-        <NoteModal isOpen={noteOpened} hash={hash}>
-          { children }
-        </NoteModal>
     </span>)
     if(watchScroll){
       return (

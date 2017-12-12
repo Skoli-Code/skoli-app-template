@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { size } from 'styled-theme'
 // wrapper to register notes
@@ -11,7 +12,7 @@ const ContentHolder = styled.div`
   padding-top: ${size('navbarHeight')};
 `;
 
-const DefaultTemplate = ({ children }) => (
+const DefaultTemplate = ({ meta, children }) => (
   <Holder>
     <Navbar />
     <ContentHolder>
@@ -24,5 +25,10 @@ const DefaultTemplate = ({ children }) => (
   </Holder>
 )
 
+DefaultTemplate.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  keywords: PropTypes.array,
+}
 
 export default DefaultTemplate

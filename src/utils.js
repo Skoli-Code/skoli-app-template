@@ -45,3 +45,6 @@ export const getTwitterShareHREF = () => {
   return `${url}?${params.join('&')}`;
 }
 
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

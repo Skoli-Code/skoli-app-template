@@ -1,3 +1,6 @@
+import HomeIcon from './icons/home'
+import AboutIcon from './icons/questionmark'
+
 const getCurrentHref = () => window.location.href;
 
 // hashtags must be separated by commas.
@@ -27,3 +30,26 @@ export const SOCIAL = {
     }
   }
 }
+
+
+
+export const NAVBAR_LINKS = [{
+    home: true,
+    icon: HomeIcon,
+    to: '/',
+    text: 'Skoli app template'
+  },
+  {
+    to: '/introduction',
+    text: 'Introduction',
+  },
+  {
+    to: '/vis-in-md',
+    text: 'Test visualization in markdown',
+  },
+  {
+    to: '/about',
+    text: 'About',
+    icon: AboutIcon,
+  }
+]
