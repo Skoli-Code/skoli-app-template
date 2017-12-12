@@ -19,6 +19,46 @@ $ yarn develop
 # OR (if gatsby is globally installed)
 $ gatsby develop
 ```
+## Add a page
+2 kind of pages are possible:
+- markdown-based pages
+- component-based pages
+
+### Markdown-based pages
+To create a markdown-based page, just create a markdown file (`.md`) under the `content` folder.
+Then you'll be able to add specific information about this page into the page's header like bellow.
+Those information will be used as meta-tags for SEO & Social Media (Facebook and Twitter cards).
+```md
+---
+- title: "Custom Page"
+- description: "A simple description"
+- keywords: "a,list,of,keywords"
+- image: images/custom-page.png
+---
+```
+
+### Component-based pages
+This kind of page can be used if you need to have a specific behavior for your page. To add one 
+component-based page in your app you need to create a `.js` file under `src/pages/`. 
+
+### Add a link of your page to the navigation bar & menu
+To add your newly created page to the navigation bar you must configure a new link in `src/constants`.
+You'll see there a `NAVBAR_LINKS` constant that's designed to hold the navigation bar links configuration.
+Please note that the links are based on the page's filename. So if you want a different link, just
+rename the file and update the link in `NAVBAR_LINKS`.
+```js
+import CustomIcon from 'icons/custom'
+const NAVBAR_LINKS = [
+  // ...
+  {
+    to: '/custom-page',
+    text: 'My Custom Page',
+    // optional icon
+    icon: CustomIcon
+  },
+]
+```
+
 ## Components inside markdown
 In order to make custom components inside markdown 2 things must be done:
 - add the component inside `remark-custom-elements` plugin configuration (`gatsby-config.js`)
