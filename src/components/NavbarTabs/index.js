@@ -19,18 +19,19 @@ const TabLink = Link.extend`
   transition: color .3s ease, background-color .3s ease;
 
   ${ifProp('home', css`
-    color: ${palette('gray', 0)};
-    background-color: ${palette('white', 0)};
+    color: ${palette('white', 1)};
+    background-color: ${palette('homeTab', 0)};
 
     svg {
       height: 40px !important;
       width: 40px !important;
       max-height: 40px !important;
+      fill: ${palette('white', 0)};
     }
   `)}
 
   &:hover, &.active {
-    background-color: ${palette('primary', 0)};
+    background-color: ${palette('secondary', 0)};
   }
 
   svg {

@@ -7,7 +7,7 @@ import { NAVBAR_LINKS as tabs } from '../../constants'
 
 const Holder = styled.div`
   height: ${size('navbarHeight')};
-  background-color: ${palette('primary', 1)}
+  background-color: ${palette('secondary', 1)}
 `
 
 const Navbar = () => (

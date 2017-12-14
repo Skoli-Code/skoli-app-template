@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { ifProp } from 'styled-tools'
 import { palette } from 'styled-theme'
 import CloseIcon from '../../icons/xmark' 
-import { createPortal } from 'react-dom'
+import Container from '../Container'
 
 const Holder = styled.div`
   position: fixed;
@@ -24,6 +25,10 @@ const TopRight = styled.div`
   z-index: 5;
   top: 1em;
   right: 1em;
+  
+  svg {
+    cursor: pointer;
+  }
 `
 
 const Content = styled.div`
@@ -81,7 +86,9 @@ class NoteModal extends Component {
           <CloseIcon />
         </TopRight>
         <Content>
-          { content }
+          <Container>
+            { content }
+          </Container>
         </Content>
       </Holder>
     )
