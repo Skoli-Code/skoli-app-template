@@ -25,30 +25,7 @@ const Template = ({ data }) => {
 export const query = graphql`
   query PageQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      hast {
-        children {
-          type
-          tagName
-          properties
-          value
-          children {
-            type
-            tagName
-            properties
-            value
-            children {
-              type
-              tagName
-              properties
-              value
-              children {
-                type
-                value
-              }
-            }
-          }
-        }
-      }
+      hast 
       internal {
         content
       }
