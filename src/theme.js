@@ -12,7 +12,8 @@ const theme = {
   sizes: {
     navbarHeight: '50px',
     containerMaxWidth: '1024px',
-  }
+  },
+  coverBlur: 10
 }
 
 export default theme

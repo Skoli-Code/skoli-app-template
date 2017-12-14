@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { prop } from 'styled-tools'
-import { size } from 'styled-theme'
+import { key, size } from 'styled-theme'
 
 const Holder = styled.div`
   position: absolute;
@@ -14,17 +14,15 @@ const Holder = styled.div`
   align-items: center;
 `
 
-const CoverImage = styled.div.attrs({
-  posOffset: ({ blur }) => blur + 5
-})`
+const CoverImage = styled.div`
   background-size: cover;
   z-index: 1;
   position: absolute;
-  top:    -${prop('posOffset', 0)}px;
-  left:   -${prop('posOffset', 0)}px;
-  right:  -${prop('posOffset', 0)}px;
-  bottom: -${prop('posOffset', 0)}px;
-  filter: blur(${prop('blur', 0)}px);
+  top:    -${props => key('coverBlur')(props)+10}px;
+  left:   -${props => key('coverBlur')(props)+10}px;
+  right:  -${props => key('coverBlur')(props)+10}px;
+  bottom: -${props => key('coverBlur')(props)+10}px;
+  filter: blur(${key('coverBlur', 0)}px);
 `
 
 const Centered = styled.div`

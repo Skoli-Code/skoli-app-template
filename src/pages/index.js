@@ -13,7 +13,7 @@ const TextAlignCenter = styled.div`
 `
 
 const IndexPage = () => (
-  <Cover background={ coverImage } blur={10}>
+  <Cover background={ coverImage }>
     <CoverTitle>
       Skoli application template
     </CoverTitle>
