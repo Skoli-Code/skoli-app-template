@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Waypoint from 'react-waypoint';
-import styled from 'styled-components';
-
+import Waypoint from 'react-waypoint'
+import styled from 'styled-components'
+import Link from '../Link'
 import NoteModal from '../NoteModal'
 import { hash } from '../../utils' 
 
@@ -56,16 +56,17 @@ class Note extends Component {
     const { watchScroll, content, children } = this.props
     const { noteOpened } = this.state
     this.hash = ~hash(content.substring(0,20)) + ''
-    const { letter } = this.watcher().addNote(this.hash, content)
+
+    const { letter } = this.watcher().addNote(this.hash, content, children)
     const noteContent = (
       <Holder>
         { !watchScroll && (<span>{ letter }.&nbsp;</span>)}
-        <a onClick={()=>this.openNote()}>
+        <Link onClick={()=>this.openNote()}>
           { content }
           { watchScroll && (
             <sup>{ letter }</sup>
           )}
-        </a>
+        </Link>
       </Holder>
     )
     if(watchScroll){

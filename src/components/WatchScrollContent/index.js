@@ -48,12 +48,12 @@ class WatchScrollContent extends Component {
     this.setState({ isNoteModalOpen: false })
   }
 
-  addNote(key, content){
+  addNote(key, content, children){
     const { notes } = this.state
     if(notes[key]){ return notes[key] }
     const notesNumber = Object.keys(notes).length
     const letter = String.fromCharCode(97 + notesNumber)
-    notes[key] = { content, letter, visible: false }
+    notes[key] = { children, content, letter, visible: false }
     this.state.notes = notes
     return notes[key]
   }

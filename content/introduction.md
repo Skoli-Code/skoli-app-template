@@ -5,11 +5,10 @@ keywords: 'test,it,with,keywords'
 ---
 
 # Introduction
-
 Nam <Note content="varius ornare">
 <h2>TEST</h2>
-Des paragraphes avec [des liens](http://google.fr)
-Des  images [des images](images/sheraf.jpg)
+Des paragraphes avec [des liens](http://google.fr)  
+Des  images ![des images](/images/sheraf.jpg)
 <ul>
 <li>des</li>
 <li>listes</li>
