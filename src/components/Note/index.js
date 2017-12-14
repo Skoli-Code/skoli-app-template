@@ -7,7 +7,6 @@ import NoteModal from '../NoteModal'
 import { hash } from '../../utils' 
 
 const Holder = styled.span`
-  font-weight: bold;
   cursor: pointer;
 `
 

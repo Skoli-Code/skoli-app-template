@@ -9,7 +9,8 @@ const {
 const customComponentsPlugin = {
   resolve: `remark-custom-elements`,
   options: {
-    components: [ 'Note', 'Ref', 'BarChart' ]
+    components: [ 'Note', 'Ref', 'BarChart' ],
+    debug: true
   }
 }
 
@@ -28,7 +29,12 @@ module.exports = {
         path: `${__dirname}/content/`
       }
     },
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [`gatsby-remark-copy-linked-files`]
+      }
+    },
     customComponentsPlugin,
   ],
 }

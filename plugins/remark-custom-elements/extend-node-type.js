@@ -21,6 +21,9 @@ module.exports = ({
         })
         .processSync(node.internal.content).contents
 
+    if(options.debug){
+      console.log(JSON.stringify(hast, null, 2))
+    }
     return hast
   }
 
