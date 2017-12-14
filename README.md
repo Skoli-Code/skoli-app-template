@@ -82,6 +82,37 @@ In order to make custom components inside markdown 2 things must be done:
 - add the component inside `remark-custom-elements` plugin configuration (`gatsby-config.js`)
 - import & add the component inside the `componentMap` (`src/templates/markdown-page.js``)
 
+### Known limitations
+Components inside markdown have some limitations important to know.
+
+#### No dynamic data
+By nature it's impossible to pass dynamic data/variable to components inside markdown. Every attribute will be treated as plain text. Thus they need to be interpreted at the components level if you want to have number or lists. See `content/introduction.md` and the `BarChart` component for an exhaustive example.
+
+#### Limited support for markdown *inside* components
+Every block-breaking markdown is not allowed inside components. This includes titles and list. 
+One workaround for this limitation is to replace the wanted markdown element by its HTML equivalent. 
+
+For instance you shouldn't do as bellow
+```md
+This is an <Note content="example">
+# This
+- will 
+- not
+- work
+</Note> of non-working example.
+```
+
+But use HTML tags instead:
+```md
+This is an <Note content="example">
+<h1>This</h1>
+<ul>
+<li>will</li>
+<li>work</li>
+</ul>
+</Note> of working example.
+```
+
 ## Notes and references 
 Notes and references are two different things. Notes are designed to contextualize a term, 
 to explain it in more depth without weightening the text. References are elements took from

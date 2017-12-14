@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "@dumpster/remark-custom-element-to-hast": "^0.5.3",
+    "@dumpster/remark-custom-element-to-hast": "^0.5.4",
     "d3": "^4.12.0",
     "gatsby": "^1.9.119",
     "gatsby-link": "^1.6.30",
