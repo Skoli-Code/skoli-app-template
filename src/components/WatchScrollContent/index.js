@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import BottomBar from '../BottomBar'
+import BottomBar from './BottomBar'
 import NoteModal from '../NoteModal'
 
 import { sleep } from '../../utils'
@@ -71,13 +71,41 @@ class WatchScrollContent extends Component {
     note.visible = false 
     this.setState({ notes })
   }
-  addRef(key, content){
+  
+  addElement(key, text, children, collection, numbering){
+    const elements = this.state[collection] = this.state[collection] || {}
+    let id = Object.keys(elements).length + 1
+    if(!numbering){
+      id = String.fromCharCode(96 + id)
+    }
+    const element = { text, children, id, visible: false }
+    elements[id] = element
+    return element
+  }
+  
+  showElement(key, collection){
+    const elements = this.state[collection]
+    const element = elements[key]
+    element.visible = true
+    this.setState({ [collection]: elements })
+  }
+
+  hideElement(key, collection){
+    const elements = this.state[collection]
+    const element = elements[key]
+    element.visible = false
+    this.setState({ [collection]: elements })
+  }
+
+  addRef(key, details, children){
     const { refs } = this.state
     if(refs[key]){ return refs[key] }
     const number = Object.keys(refs).length + 1
-    refs[key] = { number, content, visible: false }
+    refs[key] = { number, details, children, visible: false }
     this.state.refs = refs
-  } 
+    return refs[key]
+  }
+
   showRef(key){
     const { refs } = this.state
     const ref = refs[key]

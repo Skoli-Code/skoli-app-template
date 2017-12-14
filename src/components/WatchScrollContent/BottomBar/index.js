@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import Container from '../Container'
-import Note from '../Note' 
+import Container from '../../Container'
+import Note from '../../Note' 
+import Ref from '../../Ref' 
 
 const BottomBar = styled.div`
   box-shadow: 0 5px #BBB;
@@ -35,11 +36,16 @@ const ContentBottomBar = ({ notes, refs }) => (
   <BottomBar visible={ (notes.length + refs.length) > 0 }>
     <Container>
       <List>
-        { notes.map(({ letter, content, children }) => (
-          <ListElem key={`note-${letter}`}>
-            <Note watchScroll={false} content={content}>
-              { children } 
-            </Note>
+        { notes.map(({ id, text, children }) => (
+          <ListElem key={`note-${id}`}>
+            <Note inBottomBar={true} text={text}>{ children }</Note>
+          </ListElem>
+        ))}
+      </List>
+      <List>
+        { refs.map(({ id, text, children }) => (
+          <ListElem key={`ref-${id}`}>
+            <Ref inBottomBar={true} text={text}>{ children }</Ref>
           </ListElem>
         ))}
       </List>

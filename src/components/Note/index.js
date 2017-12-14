@@ -3,41 +3,22 @@ import PropTypes from 'prop-types'
 import Waypoint from 'react-waypoint'
 import styled from 'styled-components'
 import Link from '../Link'
-import NoteModal from '../NoteModal'
-import { hash } from '../../utils' 
+
+import watchScroll from '../WatchScrollContent/watchScroll'
 
 const Holder = styled.span`
   cursor: pointer;
 `
 
 class Note extends Component {
-  static contextTypes = {
-    scrollWatcher: PropTypes.object,
-  }
-
-  static defaultProps = {
-    watchScroll: true
-  }
-
-  constructor(props){
-    super(props)
-    this.state = {
-      noteOpened: false
-    }
+  state = {
+    noteOpened: false
   }
   
-  watcher(){
-    return this.context.scrollWatcher
-  }
-
   openNote(){
-    const watcher = this.watcher()
+    const { watcher } = this.props
     watcher.setNoteModalContent(this.props.children)
     watcher.openNoteModal()
-  }
-
-  closeNote(){
-    this.setState({ noteOpened: false })
   }
 
   onEnter(){
@@ -52,38 +33,28 @@ class Note extends Component {
   }
 
   render(){
-    const { watchScroll, content, children } = this.props
-    const { noteOpened } = this.state
-    this.hash = ~hash(content.substring(0,20)) + ''
-
-    const { letter } = this.watcher().addNote(this.hash, content, children)
-    const noteContent = (
+    const {
+      inBottomBar,
+      text,
+      children,
+      id
+    } = this.props
+  
+    return (
       <Holder>
-        { !watchScroll && (<span>{ letter }.&nbsp;</span>)}
+        { inBottomBar && (<span>{ id }.&nbsp;</span>)}
         <Link onClick={()=>this.openNote()}>
-          { content }
-          { watchScroll && (
-            <sup>{ letter }</sup>
+          { text }
+          { !inBottomBar && (
+            <sup>{ id }</sup>
           )}
         </Link>
       </Holder>
     )
-    if(watchScroll){
-      return (
-        <Waypoint 
-          key={this.hash}
-          onEnter={() => this.onEnter()}
-          onLeave={() => this.onLeave()}
-          topOffset={-100}
-          bottomOffset={-200}
-          >
-          { noteContent }
-        </Waypoint>
-      )
-    } else {
-      return noteContent
-    }
   }
 }
 
-export default Note
+export default watchScroll(Note, {
+  collection: 'notes',
+  numbering: false
+})

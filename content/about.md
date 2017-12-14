@@ -4,7 +4,7 @@ layout: index
 ---
 # À Propos
 
-Test de note: <Note content="ceci devrait être affiché">**Super test** avec du contenu dedans</Note>
+Test de note: <Note text="ceci devrait être affiché">**Super test** avec du contenu dedans</Note>
 
 **Strong**, [link](http://google.fr), *italic*
 
