@@ -21,17 +21,6 @@ class Note extends Component {
     watcher.openNoteModal()
   }
 
-  onEnter(){
-    const { content } = this.props
-    const { scrollWatcher } = this.context
-    scrollWatcher.showNote(this.hash)
-  }
-
-  onLeave(){
-    const { scrollWatcher } = this.context
-    scrollWatcher.hideNote(this.hash)
-  }
-
   render(){
     const {
       inBottomBar,
@@ -41,7 +30,7 @@ class Note extends Component {
     } = this.props
   
     return (
-      <Holder>
+      <Holder innerRef={this.props.innerRef}>
         { inBottomBar && (<span>{ id }.&nbsp;</span>)}
         <Link onClick={()=>this.openNote()}>
           { text }

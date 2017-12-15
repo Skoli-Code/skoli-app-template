@@ -38,14 +38,14 @@ const ContentBottomBar = ({ notes, refs }) => (
       <List>
         { notes.map(({ id, text, children }) => (
           <ListElem key={`note-${id}`}>
-            <Note inBottomBar={true} text={text}>{ children }</Note>
+            <Note inBottomBar={true} text={text} id={id}>{ children }</Note>
           </ListElem>
         ))}
       </List>
       <List>
         { refs.map(({ id, text, children }) => (
           <ListElem key={`ref-${id}`}>
-            <Ref inBottomBar={true} text={text}>{ children }</Ref>
+            <Ref inBottomBar={true} text={text} id={id}>{ children }</Ref>
           </ListElem>
         ))}
       </List>

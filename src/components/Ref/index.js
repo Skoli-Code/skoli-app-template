@@ -33,7 +33,6 @@ class Ref extends Component {
         </Link>
       </Holder>
     )
-    
   }
 }
 

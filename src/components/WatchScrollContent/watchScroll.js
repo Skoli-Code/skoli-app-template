@@ -6,6 +6,8 @@ const watchElement = (Wrapped, {
   numbering = true,
   collection,
 }) => {
+  console.log(`watchScroll[${collection}].numbering ?`, numbering)
+
   return class extends Component {
     static contextTypes = {
       scrollWatcher: PropTypes.object,
@@ -30,12 +32,20 @@ const watchElement = (Wrapped, {
         this.id, collection
       )
     }
+    
     render(){
-      const { text, children, inBottomBar } = this.props
-      const { id } = this.watcher().addElement(
-        text, children, collection
-      )
+      let id
       const watcher = this.watcher()
+      const { text, children, inBottomBar } = this.props
+      if(inBottomBar){
+        id = this.props.id
+      } else {
+        const element = watcher.addElement(
+          text, children, collection, numbering
+        )
+        id = element.id
+      }
+
       this.id = id
       const element = (
         <Wrapped
@@ -46,6 +56,7 @@ const watchElement = (Wrapped, {
           children={children}
         />
       )
+      console.log('element', element)
       if (inBottomBar) {
         return element
       } else {

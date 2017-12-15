@@ -47,34 +47,12 @@ class WatchScrollContent extends Component {
     console.log('closeNoteModal !')
     this.setState({ isNoteModalOpen: false })
   }
-
-  addNote(key, content, children){
-    const { notes } = this.state
-    if(notes[key]){ return notes[key] }
-    const notesNumber = Object.keys(notes).length
-    const letter = String.fromCharCode(97 + notesNumber)
-    notes[key] = { children, content, letter, visible: false }
-    this.state.notes = notes
-    return notes[key]
-  }
-
-  showNote(key){
-    const { notes } = this.state
-    const note = notes[key]
-    note.visible = true
-    this.setState({ notes })
-  }
-
-  hideNote(key){
-    const { notes } = this.state
-    const note = notes[key]
-    note.visible = false 
-    this.setState({ notes })
-  }
   
-  addElement(key, text, children, collection, numbering){
+  addElement(text, children, collection, numbering){
     const elements = this.state[collection] = this.state[collection] || {}
     let id = Object.keys(elements).length + 1
+    console.log(`WatchScrollContent[${collection}]- numbering`, numbering)
+
     if(!numbering){
       id = String.fromCharCode(96 + id)
     }
@@ -95,33 +73,6 @@ class WatchScrollContent extends Component {
     const element = elements[key]
     element.visible = false
     this.setState({ [collection]: elements })
-  }
-
-  addRef(key, details, children){
-    const { refs } = this.state
-    if(refs[key]){ return refs[key] }
-    const number = Object.keys(refs).length + 1
-    refs[key] = { number, details, children, visible: false }
-    this.state.refs = refs
-    return refs[key]
-  }
-
-  showRef(key){
-    const { refs } = this.state
-    const ref = refs[key]
-    ref.visible = true
-    this.setState({ refs })
-  }
-
-  hideRef(key){
-    const { refs } = this.state
-    const ref = refs[key]
-    ref.visible = false
-    this.setState({ refs })
-  }
-  
-  
-  componentDidMount(){
   }
 
   visibleCollection(collection){
