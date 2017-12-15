@@ -7,13 +7,18 @@ import GatsbyLink from 'gatsby-link'
 const Link = styled(
   ({ to, href, children, home, ...props }) => {
     let $link
+    let _to = to
+    props = props ? props : {}
     if(href){
-      to = href
+      console.log('href', href)
+      _to = href
     }
-    props.to = to 
+    props.to = _to
+
+    console.log(props)
     if(props.to){
       if(props.to.startsWith('http')){
-        $link = <a target="_blank" {...props}>{ children }</a>
+        $link = <a href={props.to} target="_blank" {...props}>{ children }</a>
       } else {
         $link = <GatsbyLink  {...props}>{ children }</GatsbyLink>
       }
