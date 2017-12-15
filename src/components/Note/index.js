@@ -30,6 +30,9 @@ class Note extends Component {
     } = this.props
   
     return (
+      // this innerRef settings is here to make <Waypoint> works 
+      // in components/WatchScrollContent/watchScroll.
+      // See https://github.com/brigade/react-waypoint#children
       <Holder innerRef={this.props.innerRef}>
         { inBottomBar && (<span>{ id }.&nbsp;</span>)}
         <Link onClick={()=>this.openNote()}>

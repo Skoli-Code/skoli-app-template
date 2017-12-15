@@ -4,6 +4,8 @@ import Waypoint from 'react-waypoint'
 
 const watchElement = (Wrapped, {
   numbering = true,
+  topOffset = -20,
+  bottomOffset = -30,
   collection,
 }) => {
   console.log(`watchScroll[${collection}].numbering ?`, numbering)
@@ -64,8 +66,8 @@ const watchElement = (Wrapped, {
           <Waypoint 
             onEnter={() => this.onEnter()}
             onLeave={() => this.onLeave()}
-            topOffset={-10}
-            bottomOffset={-20}
+            topOffset={topOffset}
+            bottomOffset={bottomOffset}
           >
             { element }
           </Waypoint>
