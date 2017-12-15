@@ -75,32 +75,33 @@ class WatchScrollContent extends Component {
     this.setState({ [collection]: elements })
   }
 
+  collection(collection){
+    const elements = this.state[collection]
+    return Object.keys(elements).map(key => elements[key])
+  }
+  
   visibleCollection(collection){
-    return Object.keys(collection)
-      .map(key => collection[key])
+    return this.collection(collection)
       .filter(element => element.visible)
-  }
-
-  visibleNotes(){
-    return this.visibleCollection(this.state.notes)
-  }
-
-  visibleRefs(){
-    return this.visibleCollection(this.state.refs)
   }
 
   render(){
     const { children } = this.props
     const { isNoteModalOpen, noteModalContent } = this.state
-    const refs = this.visibleRefs()
-    const notes = this.visibleNotes()
-    const bottomBarProps = { refs, notes }
+   
+    const bottomBarProps = {
+      notes: this.collection('notes'),
+      refs: this.collection('refs'),
+      visibleRefs: this.visibleCollection('refs'),
+      visibleNotes: this.visibleCollection('notes'),
+    }
+
     return (
       <ScrollWrapper>
         <Content>
           { children }
+          <BottomBar {...bottomBarProps}/>
         </Content>
-        <BottomBar {...bottomBarProps}/>
         <NoteModal isOpen={isNoteModalOpen} content={noteModalContent}/>
       </ScrollWrapper>
     )

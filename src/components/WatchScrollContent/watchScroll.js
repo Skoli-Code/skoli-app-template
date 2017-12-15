@@ -4,12 +4,10 @@ import Waypoint from 'react-waypoint'
 
 const watchElement = (Wrapped, {
   numbering = true,
-  topOffset = -20,
-  bottomOffset = -30,
+  topOffset = -10,
+  bottomOffset = -10,
   collection,
 }) => {
-  console.log(`watchScroll[${collection}].numbering ?`, numbering)
-
   return class extends Component {
     static contextTypes = {
       scrollWatcher: PropTypes.object,
@@ -58,7 +56,6 @@ const watchElement = (Wrapped, {
           children={children}
         />
       )
-      console.log('element', element)
       if (inBottomBar) {
         return element
       } else {

@@ -8,9 +8,9 @@ const BottomBar = styled.div`
   box-shadow: 0 5px #BBB;
   padding-top: 5px;
   background: white;
-  position: fixed;
+  position: ${({ fixed }) => fixed ? 'fixed' : 'static' };
   height: 165px;
-  bottom: ${({ visible }) => visible ? 0 : -165}px;
+  bottom: 0;
   left: 0;
   right: 0;
   transition: bottom .3s ease;
@@ -32,26 +32,45 @@ const ListElem = styled.li`
   }
 `
 
-const ContentBottomBar = ({ notes, refs }) => (
-  <BottomBar visible={ (notes.length + refs.length) > 0 }>
-    <Container>
-      <List>
-        { notes.map(({ id, text, children }) => (
-          <ListElem key={`note-${id}`}>
-            <Note inBottomBar={true} text={text} id={id}>{ children }</Note>
-          </ListElem>
-        ))}
-      </List>
-      <List>
-        { refs.map(({ id, text, children }) => (
-          <ListElem key={`ref-${id}`}>
-            <Ref inBottomBar={true} text={text} id={id}>{ children }</Ref>
-          </ListElem>
-        ))}
-      </List>
-    </Container>
-  </BottomBar>
-
+const Notes = ({ notes }) => (
+  <List>
+    { notes.map(({ id, text, children }) => (
+      <ListElem key={`note-${id}`}>
+        <Note inBottomBar={true} text={text} id={id}>{ children }</Note>
+      </ListElem>
+    ))}
+  </List>
 )
 
+const Refs = ({ refs }) => (
+  <List>
+    { refs.map(({ id, text, children }) => (
+      <ListElem key={`ref-${id}`}>
+        <Ref inBottomBar={true} text={text} id={id}>{ children }</Ref>
+      </ListElem>
+    ))}
+  </List>
+)
+
+const ContentBottomBar = ({ notes, refs, visibleNotes, visibleRefs }) => {
+  const fixed = visibleNotes.length + visibleRefs.length > 0
+  return (
+    <BottomBar fixed={fixed}>
+      <Container>
+        { !fixed && (
+          <Notes notes={ notes }/>
+        )}
+        { fixed && (
+          <Notes notes={ visibleNotes }/>
+        )}
+        { !fixed && (
+          <Refs refs={ refs }/>
+        )}
+        { fixed && (
+          <Refs refs={ visibleRefs }/>
+        )}
+      </Container>
+    </BottomBar>
+  )
+}
 export default ContentBottomBar
