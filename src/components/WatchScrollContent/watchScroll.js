@@ -4,8 +4,8 @@ import Waypoint from 'react-waypoint'
 
 const watchElement = (Wrapped, {
   numbering = true,
-  topOffset = -10,
-  bottomOffset = -10,
+  topOffset = 30,
+  bottomOffset = 30,
   collection,
 }) => {
   return class extends Component {
@@ -36,26 +36,25 @@ const watchElement = (Wrapped, {
     render(){
       let id
       const watcher = this.watcher()
-      const { text, children, inBottomBar } = this.props
+      const { inBottomBar, ...otherProps } = this.props
+      
       if(inBottomBar){
         id = this.props.id
       } else {
-        const element = watcher.addElement(
-          text, children, collection, numbering
-        )
+        const element = watcher.addElement({
+          collection, numbering, ...otherProps
+        })
         id = element.id
       }
-
       this.id = id
-      const element = (
-        <Wrapped
-          watcher={watcher}
-          id={id}
-          inBottomBar={inBottomBar}
-          text={text}
-          children={children}
-        />
-      )
+      const props = {
+        ...otherProps,
+        ...element,
+        inBottomBar,
+        id,
+      }
+      const element = <Wrapped watcher={watcher} {...props} />
+     
       if (inBottomBar) {
         return element
       } else {

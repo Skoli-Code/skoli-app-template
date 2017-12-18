@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Waypoint from 'react-waypoint'
 import styled from 'styled-components'
 import Link from '../Link'
+import Bold from '../Bold'
 
 import watchScroll from '../WatchScrollContent/watchScroll'
 
@@ -34,7 +35,7 @@ class Note extends Component {
       // in components/WatchScrollContent/watchScroll.
       // See https://github.com/brigade/react-waypoint#children
       <Holder innerRef={this.props.innerRef}>
-        { inBottomBar && (<span>{ id }.&nbsp;</span>)}
+        { inBottomBar && (<Bold>{ id }.&nbsp;</Bold>)}
         <Link onClick={()=>this.openNote()}>
           { text }
           { !inBottomBar && (

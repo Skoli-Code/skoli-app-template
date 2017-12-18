@@ -2,13 +2,11 @@ import React from 'react'
 import { size } from 'styled-theme'
 
 import FacebookProvider, { Share } from 'react-facebook'
-import { SOCIAL } from '../constants'
-import { getTwitterShareHREF, openModal } from '../utils'
+import { SOCIAL } from '../../constants'
+import { getTwitterShareHREF, openModal } from '../../utils'
 
-
-import FacebookIcon from '../icons/facebook'
-import TwitterIcon from '../icons/twitter'
-
+import FacebookIcon from '../../icons/social/facebook'
+import TwitterIcon from '../../icons/social/twitter'
 import './styles.css';
 
 const shareTwitter = () => {

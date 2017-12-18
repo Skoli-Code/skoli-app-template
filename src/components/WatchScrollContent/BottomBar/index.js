@@ -19,6 +19,7 @@ const BottomBar = styled.div`
 const List = styled.ul`
   list-style: none;
   margin: 0;
+  margin-bottom: 1em;
 `
 
 const ListElem = styled.li`

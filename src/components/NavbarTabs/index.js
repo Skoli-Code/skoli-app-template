@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { ifProp } from 'styled-tools'
 import { palette, size } from 'styled-theme'
 import Link from '../Link' 
+// import SocialSharing from '../SocialSharing' 
 
 const Tabs = styled.div`
   display: flex;

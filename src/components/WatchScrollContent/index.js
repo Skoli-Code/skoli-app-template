@@ -11,7 +11,9 @@ import NoteModal from '../NoteModal'
 import { sleep } from '../../utils'
 
 const ScrollWrapper = styled.div``
-const Content = styled.div``
+const Content = styled.div`
+  overflow: hidden;
+`
 
 class WatchScrollContent extends Component {
   static childContextTypes = {
@@ -44,19 +46,16 @@ class WatchScrollContent extends Component {
   }
 
   closeNoteModal(){
-    console.log('closeNoteModal !')
     this.setState({ isNoteModalOpen: false })
   }
   
-  addElement(text, children, collection, numbering){
+  addElement({ collection, numbering, ...props }){
     const elements = this.state[collection] = this.state[collection] || {}
     let id = Object.keys(elements).length + 1
-    console.log(`WatchScrollContent[${collection}]- numbering`, numbering)
-
     if(!numbering){
       id = String.fromCharCode(96 + id)
     }
-    const element = { text, children, id, visible: false }
+    const element = { id, visible: false, ...props }
     elements[id] = element
     return element
   }
