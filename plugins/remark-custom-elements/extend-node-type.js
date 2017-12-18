@@ -4,6 +4,11 @@ const GraphQLJSON = require('graphql-type-json')
 const unified = require('unified')
 const frontmatter = require('remark-frontmatter')
 
+
+const removeHeader = (md) => {
+  return md.replace(/^---[\n\s\w\W]*---\n/g, '')
+}
+
 module.exports = ({
   getNode,
   cache,
@@ -13,18 +18,23 @@ module.exports = ({
   // we only extend nodes created by gatsby-transformer-remark
   if (type.name !== `MarkdownRemark`) { return {} }
   function parseElements(node){
-    const hast = unified()
+    let parsed
+    const parser = unified()
         .use(parse)
-        .use(frontmatter, ['yaml'])
         .use(customParser, {
           componentWhitelist: options.components 
         })
-        .processSync(node.internal.content).contents
-
-    if(options.debug){
-      console.log(JSON.stringify(hast, null, 2))
+    try {
+      parsed = parser.processSync(
+          removeHeader(node.internal.content)
+        ).contents
+    } catch (e) {
+      console.log('An error occured during parsing:', e)
     }
-    return hast
+    if(options.debug){
+      console.log(JSON.stringify(parsed, null, 2))
+    }
+    return parsed
   }
 
   return {
