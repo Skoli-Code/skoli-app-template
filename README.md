@@ -75,6 +75,13 @@ export const NAVBAR_LINKS = [
 ```
 
 ## Theme 
+This project is developed with the [styled-theme]() library to allow theming. Here are a summary of the theme's variables located under `src/theme.js`
+
+| `palette` | Color palette for the application | 
+| `sizes.navbarHeight` | Height of the top's navigation bar |
+| `sizes.containerMaxWidth` | Height of the top's navigation bar |
+| `sizes.desktopMinWidth` | Breakpoint to detect desktop's width |
+| `coverBlur` | Set the blur size (in `px`) of the cover's image |
 
 
 ## Components inside markdown

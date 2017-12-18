@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "@dumpster/remark-custom-element-to-hast": "^0.5.4",
+    "@dumpster/remark-custom-element-to-hast": "^0.5.5",
     "d3": "^4.12.0",
     "gatsby": "^1.9.119",
     "gatsby-link": "^1.6.30",
@@ -19,6 +19,7 @@
     "react": "16.2.0",
     "react-d3": "^0.4.0",
     "react-dom": "^16.2.0",
+    "react-facebook": "^4.1.1",
     "react-waypoint": "^7.3.1",
     "remark-frontmatter": "^1.1.0",
     "styled-components": "^2.2.3",
