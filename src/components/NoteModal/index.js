@@ -73,13 +73,11 @@ class NoteModal extends Component {
   }
   
   close(){
-    console.log('NoteModal.close')
     this.context.scrollWatcher.closeNoteModal()
   }
 
   render(){
     const { isOpen, content } = this.props
-    console.log('NoteModal.render - content', content)
     const modal = (
       <Holder isOpen={ isOpen }>
         <TopRight onClick={() => this.close()}>

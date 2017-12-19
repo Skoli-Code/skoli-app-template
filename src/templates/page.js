@@ -2,14 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { size } from 'styled-theme'
-// wrapper to register notes
 import Container from '../components/Container'
 import Navbar from '../components/Navbar'
 import WatchScrollContent from '../components/WatchScrollContent' 
+import { media } from '../styled-utils' 
 
 const Holder = styled.div``;
 const ContentHolder = styled.div`
   padding-top: ${size('navbarHeight')};
+  
+  ${media.tablet`
+    padding-top: 20px;
+  `};
 `;
 
 const DefaultTemplate = ({ meta, children }) => (

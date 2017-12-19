@@ -2,11 +2,17 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { ifProp } from 'styled-tools'
 import { palette, size } from 'styled-theme'
+import { media } from '../../styled-utils'
+
 import Link from '../Link' 
 // import SocialSharing from '../SocialSharing' 
 
 const Tabs = styled.div`
   display: flex;
+
+  ${media.tablet`
+    display: none;
+  `}
 `
 
 const TabLink = Link.extend`

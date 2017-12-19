@@ -42,7 +42,6 @@ class RenderAST extends Component {
       ...BaseComponents,
       ...componentsMap
     }
-    console.log('RenderHAST', hast) 
     const renderTag = ({
       type,
       tagName,

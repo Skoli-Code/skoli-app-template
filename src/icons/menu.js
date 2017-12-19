@@ -1,26 +1,40 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Icon from './icon';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { size } from 'styled-theme'
+import { ifProp } from 'styled-tools'
+import GenericIcon from './icon'
 
-import './styles.css';
+const Icon = GenericIcon.extend`
+  opacity: ${ifProp('visible', 1, 0)};
+  pointer-events: ${ifProp('visible', 'auto', 'none')};
+  transform: rotate(${ifProp('visible', 0, 180)}deg);
+  transition: transform .3s ease,
+    opacity .2s ease-out,
+    width .5s ease,
+    height .5s ease;
+`
 
-const OpenIcon = ({
-  visible,
-  width,
-  height,
-  ...props
-}) => (
-  <Icon
-    className={
-      'open-icon '+(visible?'open-icon--visible':'')
-    }
-    fill="#fffff"
+const IconHolder = styled.div`
+  height: ${size('navbarHeight')};
+  width: ${size('navbarHeight')};
+  position: relative;
+  & > .icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+`
+
+const OpenIcon = (props) => (
+  <Icon  
     preserveAspectRatio="none"
     x="0px"
     y="0px"
     viewBox="0 0 100 100"
-    width={width}
-    height={height}
     {...props}
   >
     <g transform="matrix( 1, 0, 0, 1, 0,0)">
@@ -35,18 +49,9 @@ const OpenIcon = ({
   </Icon>
 );
 
-const CloseIcon = ({
-  visible,
-  width,
-  height,
-  ...props
-}) => (
+const CloseIcon = (props) => (
   <Icon
-    width={width}
-    height={height}
-    className={
-      'close-icon '+(visible?'close-icon--visible':'')
-    }
+    {...props}
     viewBox="0 0 100 100"
     x="0px"
     y="0px"

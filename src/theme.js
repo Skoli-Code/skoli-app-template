@@ -12,6 +12,8 @@ const theme = {
   sizes: {
     navbarHeight: '50px',
     containerMaxWidth: '1024px',
+    mobileMaxWidth: '420px',
+    tabletMaxWidth: '840px',
   },
   coverBlur: 10
 }

@@ -10,12 +10,10 @@ const Link = styled(
     let _to = to
     props = props ? props : {}
     if(href){
-      console.log('href', href)
       _to = href
     }
     props.to = _to
 
-    console.log(props)
     if(props.to){
       if(props.to.startsWith('http')){
         $link = <a href={props.to} target="_blank" {...props}>{ children }</a>
