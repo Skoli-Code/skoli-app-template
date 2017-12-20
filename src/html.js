@@ -25,6 +25,7 @@ module.exports = class HTML extends React.Component {
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+          <link rel="icon" href="https://realfavicongenerator.net/blog/wp-content/uploads/2015/10/demo_favicon.png" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
