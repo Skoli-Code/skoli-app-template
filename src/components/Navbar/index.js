@@ -8,7 +8,12 @@ import { NAVBAR_LINKS as links } from '../../constants'
 
 const Holder = styled.div`
   height: ${size('navbarHeight')};
-  background-color: ${palette('secondary', 1)}
+  background-color: ${palette('secondary', 1)};
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left:0;
+  right: 0;
 `
 
 const Navbar = () => (

@@ -1,15 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import { size, palette } from 'styled-theme'
+import { ifProp } from 'styled-tools'
 import Container from '../../Container'
 import Note from '../../Note' 
 import Ref from '../../Ref' 
 
 const BottomBar = styled.div`
-  box-shadow: 0 5px #BBB;
+  border-top: 2px solid ${palette('gray', 2)};
   padding-top: 5px;
   background: white;
-  position: ${({ fixed }) => fixed ? 'fixed' : 'static' };
-  height: 165px;
+  position: ${ifProp('isFixed', 'fixed', 'static')};
+  height: ${size('bottomBarHeight')};
   bottom: 0;
   left: 0;
   right: 0;
@@ -53,25 +55,13 @@ const Refs = ({ refs }) => (
   </List>
 )
 
-const ContentBottomBar = ({ notes, refs, visibleNotes, visibleRefs }) => {
-  const fixed = visibleNotes.length + visibleRefs.length > 0
-  return (
-    <BottomBar fixed={fixed}>
-      <Container>
-        { !fixed && (
-          <Notes notes={ notes }/>
-        )}
-        { fixed && (
-          <Notes notes={ visibleNotes }/>
-        )}
-        { !fixed && (
-          <Refs refs={ refs }/>
-        )}
-        { fixed && (
-          <Refs refs={ visibleRefs }/>
-        )}
-      </Container>
-    </BottomBar>
-  )
-}
+const ContentBottomBar = ({ isFixed, notes, refs }) => (
+  <BottomBar isFixed={isFixed}>
+    <Container>
+      <Notes notes={ notes }/>
+      <Refs refs={ refs }/>
+    </Container>
+  </BottomBar>
+)
+
 export default ContentBottomBar

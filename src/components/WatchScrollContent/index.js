@@ -3,14 +3,20 @@
  */ 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { size, palette } from 'styled-theme'
+import { ifProp } from 'styled-tools'
 
 import BottomBar from './BottomBar'
 import NoteModal from '../NoteModal'
 
 import { sleep } from '../../utils'
 
-const ScrollWrapper = styled.div``
+const ScrollWrapper = styled.div`
+  ${ifProp('isFixed', css`
+    padding-bottom: ${size('bottomBarHeight')}; 
+  `)}
+`
 const Content = styled.div`
   overflow: hidden;
 `
@@ -23,7 +29,7 @@ class WatchScrollContent extends Component {
   getChildContext(){
     return { scrollWatcher: this }
   }
-
+  
   constructor(props){
     super(props)
     this.state = {
@@ -60,18 +66,16 @@ class WatchScrollContent extends Component {
     return element
   }
   
-  showElement(key, collection){
+  showElement(key, collection, v = true){
     const elements = this.state[collection]
     const element = elements[key]
-    element.visible = true
+    element.visible = v
+    // console.log(v ? 'show' : 'hide', key, collection, element)
     this.setState({ [collection]: elements })
   }
-
+  
   hideElement(key, collection){
-    const elements = this.state[collection]
-    const element = elements[key]
-    element.visible = false
-    this.setState({ [collection]: elements })
+    this.showElement(key, collection, false)
   }
 
   collection(collection){
@@ -83,20 +87,22 @@ class WatchScrollContent extends Component {
     return this.collection(collection)
       .filter(element => element.visible)
   }
-
+  
   render(){
     const { children } = this.props
     const { isNoteModalOpen, noteModalContent } = this.state
-   
-    const bottomBarProps = {
-      notes: this.collection('notes'),
-      refs: this.collection('refs'),
-      visibleRefs: this.visibleCollection('refs'),
-      visibleNotes: this.visibleCollection('notes'),
-    }
+    let notes = this.collection('notes')
+    let refs = this.collection('refs')
+    const isVisible = el => el.visible
+    const visibleNotes = notes.filter(isVisible)
+    const visibleRefs = refs.filter(isVisible)
+    const isFixed = (visibleNotes.length + visibleRefs.length) > 0
+    notes = isFixed ? visibleNotes : notes
+    refs = isFixed ? visibleRefs : refs
+    const bottomBarProps = { notes, refs, isFixed }
 
     return (
-      <ScrollWrapper>
+      <ScrollWrapper isFixed={isFixed}>
         <Content>
           { children }
           <BottomBar {...bottomBarProps}/>

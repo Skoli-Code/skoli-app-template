@@ -4,8 +4,6 @@ import Waypoint from 'react-waypoint'
 
 const watchElement = (Wrapped, {
   numbering = true,
-  topOffset = 30,
-  bottomOffset = 30,
   collection,
 }) => {
   return class extends Component {
@@ -32,12 +30,12 @@ const watchElement = (Wrapped, {
         this.id, collection
       )
     }
-    
     render(){
       let id
       const watcher = this.watcher()
       const { inBottomBar, ...otherProps } = this.props
-      
+      const { topOffset, bottomOffset } = watcher.props
+
       if(inBottomBar){
         id = this.props.id
       } else {
@@ -60,6 +58,7 @@ const watchElement = (Wrapped, {
       } else {
         return (
           <Waypoint 
+            scrollableAncestor={window}
             onEnter={() => this.onEnter()}
             onLeave={() => this.onLeave()}
             topOffset={topOffset}

@@ -9,11 +9,7 @@ import { media } from '../styled-utils'
 
 const Holder = styled.div``;
 const ContentHolder = styled.div`
-  padding-top: ${size('navbarHeight')};
-  
-  ${media.tablet`
-    padding-top: 20px;
-  `};
+  padding-top: 100px;
 `;
 
 const DefaultTemplate = ({ meta, children }) => (
@@ -21,7 +17,7 @@ const DefaultTemplate = ({ meta, children }) => (
     <Navbar />
     <ContentHolder>
       <Container>
-        <WatchScrollContent>
+        <WatchScrollContent topOffset={50} bottomOffset={40}>
           { children }
         </WatchScrollContent>
       </Container>
