@@ -29,6 +29,9 @@ const Centered = styled.div`
   margin: auto;
   max-width: ${size('containerMaxWidth')};
   position: relative;
+  padding: 15px;
+  padding-bottom: 60px;
+  color: white;
   z-index: 2;
 `
 
