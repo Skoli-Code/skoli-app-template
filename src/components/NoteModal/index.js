@@ -23,9 +23,8 @@ const Holder = styled.div`
 const TopRight = styled.div`
   position: absolute;
   z-index: 5;
-  top: 1em;
-  right: 1em;
-  
+  top: calc(${size('navbarHeight')} + 15px);
+  right: 15px;
   svg {
     cursor: pointer;
   }
@@ -38,7 +37,7 @@ const Content = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 1em;
+  padding: 15px;
 `
 
 const modalRoot = document.getElementById('__modals')
