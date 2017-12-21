@@ -17,7 +17,7 @@ const DefaultTemplate = ({ meta, children }) => (
     <Navbar />
     <ContentHolder>
       <Container>
-        <WatchScrollContent topOffset={50} bottomOffset={40}>
+        <WatchScrollContent topOffset={80} bottomOffset={80}>
           { children }
         </WatchScrollContent>
       </Container>

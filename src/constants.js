@@ -1,7 +1,12 @@
-import HomeIcon from './icons/home'
-import AboutIcon from './icons/questionmark'
+import canUseDom from 'can-use-dom'
 
-const getCurrentHref = () => window.location.href;
+import AboutIcon from './icons/questionmark'
+import HomeIcon from './icons/home'
+
+export const DEFAULT_URL = 'http://skoli.fr'
+export const getCurrentHref = () => (
+  !canUseDom ? DEFAULT_URL : window.location.href
+)
 
 // hashtags must be separated by commas.
 const TWEET_HASHTAGS = ''

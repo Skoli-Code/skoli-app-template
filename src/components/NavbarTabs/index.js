@@ -4,8 +4,8 @@ import { ifProp } from 'styled-tools'
 import { palette, size } from 'styled-theme'
 import { media } from '../../styled-utils'
 
+import SocialSharing from '../SocialSharing'
 import Link from '../Link' 
-// import SocialSharing from '../SocialSharing' 
 
 const Tabs = styled.div`
   display: flex;
@@ -60,6 +60,7 @@ const Tab = ({ to, text, icon:TabIcon, home=false }) => (
 const NavbarTabs = ({ tabs }) => (
   <Tabs>
     { tabs.map((tab,i) => <Tab key={`tab-${i}`} {...tab} /> )}
+    <SocialSharing />
   </Tabs>
 )
 

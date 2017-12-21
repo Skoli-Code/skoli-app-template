@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { palette, size } from 'styled-theme'
 import { ifProp } from 'styled-tools'
 
 import { media } from '../../styled-utils'
 import Link from '../Link'
+import SocialSharing from '../SocialSharing'
 import MenuIcon from '../../icons/menu'
 
 const MenuHolder = styled.div`
@@ -31,24 +32,43 @@ const Menu = styled.div`
   bottom: 0;
   z-index: 5;
   color: white;
-  /*background-color: rgb(152, 143, 134);/* PANTONE WARM GREY 7 C */
-  background-color: black;
+  background-color: ${palette('gray',0)};
 `
 
-const ItemLink = Link.extend`
-  display: block;
+const ItemBlock = styled.div`
   height: ${size('navbarHeight')};
   line-height: ${size('navbarHeight')};
   padding: 15px;
   font-size: 20px;
   text-transform: uppercase;
+
+  ${ifProp('home', css`
+    width: 100%;
+    position: absolute;
+    z-index: 5;
+    left: 0; 
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 0;
+    text-align: center;
+    & > a {
+      color: ${palette('white', 1)};
+    }
+  `)}
+
+  .social-sharing {
+    width: 100%;
+    height: auto !important;
+  }
 `
 
-
-const MenuItem = ({ to, text }) => (
-  <ItemLink to={to} alt={text}>
-    { text }
-  </ItemLink>
+const MenuItem = ({ to, text, home }) => (
+  <ItemBlock home={home}>
+    <Link to={to} alt={text}>
+      { text }
+    </Link>
+  </ItemBlock>
 )
 
 class NavbarMenu extends Component {
@@ -66,9 +86,13 @@ class NavbarMenu extends Component {
 
   render(){
     const { items } = this.props
+    const home = items.find(el => el.home) 
+    const menuItems = items.filter(el => !el.home)
+
     const { opened } = this.state
     return (
       <MenuHolder>
+        <MenuItem {...home } />
         <MenuIcon
           className='menu-icon'
           opened={opened}
@@ -77,7 +101,10 @@ class NavbarMenu extends Component {
           onClick={() => this.toggleMenu()}
         />
         <Menu opened={opened}>
-          { items.map(el => (
+          <ItemBlock>
+            <SocialSharing />
+          </ItemBlock>
+          { menuItems.map(el => (
             <MenuItem key={`item-${el.to}`} {...el}/>
           ))}
         </Menu>

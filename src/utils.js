@@ -1,6 +1,25 @@
 import { SOCIAL } from './constants'
 
+
+export { getCurrentHref } from './utils' 
+
 const { TWITTER } = SOCIAL
+
+// took from react-facebook
+export const clearUndefinedProperties = (obj) => {
+  if (!obj) {
+    return obj;
+  }
+  const newObj = {};
+  Object.keys(obj).forEach((propertyName) => {
+    const value = obj[propertyName];
+    if (value !== undefined) {
+      newObj[propertyName] = value;
+    }
+  })
+  return newObj
+}
+
 
 // source https://stackoverflow.com/a/7616484/885541 
 export const hash = (str) => {
@@ -17,10 +36,8 @@ export const hash = (str) => {
 export const openModal = (href, w, h) => {
   const ww = window.innerWidth
   const wh = window.innerHeight
-  const wstyle = `
-  height=${h},width=${w},top=${(wh / 2) - (h / 2)},left=${(ww / 2) - (w / 2)},
-    toolbar=0,location=0
-  `
+  const wstyle = `height=${h},width=${w},top=${(wh / 2) - (h / 2)},left=${(ww / 2) - (w / 2)},toolbar=0,location=0`;
+  console.log('window.open', href, wstyle)
   window.open(href, 'socialshare', wstyle)
 }
 

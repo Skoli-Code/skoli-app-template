@@ -1,6 +1,7 @@
 const theme = {
   fonts: {
-    primary: ''
+    primary: "'Poppins', Arial, sans-serif",
+    secondary: "'Josefin Slab',TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif"
   },
   palette: {
     homeTab: ['#3e3e3e'],

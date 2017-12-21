@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { ifProp } from 'styled-tools'
-import { palette } from 'styled-theme'
+import { size, palette } from 'styled-theme'
 import CloseIcon from '../../icons/xmark' 
 import Container from '../Container'
 
@@ -34,7 +34,7 @@ const TopRight = styled.div`
 const Content = styled.div`
   position: absolute;
   z-index: 4;
-  top: 0;
+  top: ${size('navbarHeight')};
   left: 0;
   right: 0;
   bottom: 0;
