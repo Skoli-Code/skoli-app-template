@@ -3,6 +3,7 @@
  */ 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Waypoint from 'react-waypoint'
 import styled, { css } from 'styled-components'
 import { size, palette } from 'styled-theme'
 import { ifProp } from 'styled-tools'
@@ -36,6 +37,7 @@ class WatchScrollContent extends Component {
       notes: {},
       refs: {},
       isNoteModalOpen: false,
+      isDynamicBottomBarEnabled: true,
       noteModalContent: null
     }
   }
@@ -88,25 +90,41 @@ class WatchScrollContent extends Component {
       .filter(element => element.visible)
   }
   
+  enableFixedBar(){
+    this.setState({
+      isDynamicBottomBarEnabled: true
+    })
+  }
+  
+  disableFixedBar(){
+    this.setState({
+      isDynamicBottomBarEnabled: false
+    })
+  }
   render(){
     const { children } = this.props
-    const { isNoteModalOpen, noteModalContent } = this.state
+    const { isNoteModalOpen, noteModalContent, isDynamicBottomBarEnabled } = this.state
     let notes = this.collection('notes')
     let refs = this.collection('refs')
     const isVisible = el => el.visible
     const visibleNotes = notes.filter(isVisible)
     const visibleRefs = refs.filter(isVisible)
-    const isFixed = (visibleNotes.length + visibleRefs.length) > 0
-    notes = isFixed ? visibleNotes : notes
-    refs = isFixed ? visibleRefs : refs
-    const bottomBarProps = { notes, refs, isFixed }
+    const isDynamicBottomBarVisible = isDynamicBottomBarEnabled && (visibleNotes.length + visibleRefs.length) > 0
+
+    console.log('isDynamicBottomBarVisible ?', isDynamicBottomBarVisible)
 
     return (
-      <ScrollWrapper isFixed={isFixed}>
+      <ScrollWrapper isFixed={isDynamicBottomBarVisible}>
         <Content>
           { children }
-          <BottomBar {...bottomBarProps}/>
+          <Waypoint
+            onEnter={() => this.disableFixedBar()}
+            onLeave={() => this.enableFixedBar()}
+          >
+          <BottomBar isVisible={true} isFixed={false} notes={notes} refs={refs} />
+          </Waypoint>
         </Content>
+        <BottomBar isVisible={isDynamicBottomBarVisible} isFixed={true} notes={visibleNotes} refs={visibleRefs} />
         <NoteModal isOpen={isNoteModalOpen} content={noteModalContent}/>
       </ScrollWrapper>
     )

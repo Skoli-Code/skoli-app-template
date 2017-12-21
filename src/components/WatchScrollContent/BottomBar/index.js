@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { size, palette } from 'styled-theme'
 import { ifProp } from 'styled-tools'
 import Container from '../../Container'
@@ -7,12 +7,14 @@ import Note from '../../Note'
 import Ref from '../../Ref' 
 
 const BottomBar = styled.div`
-  border-top: 2px solid ${palette('gray', 2)};
+  ${ifProp('isVisible', css`
+    border-top: 2px solid ${palette('gray', 2)};
+  `)}
   padding-top: 5px;
   background: white;
   position: ${ifProp('isFixed', 'fixed', 'static')};
   height: ${size('bottomBarHeight')};
-  bottom: 0;
+  bottom: ${ifProp('isVisible', 0, -200)}px;
   left: 0;
   right: 0;
   transition: bottom .3s ease;
@@ -55,8 +57,8 @@ const Refs = ({ refs }) => (
   </List>
 )
 
-const ContentBottomBar = ({ isFixed, notes, refs }) => (
-  <BottomBar isFixed={isFixed}>
+const ContentBottomBar = ({ isFixed, notes, refs, ...otherProps}) => (
+  <BottomBar isFixed={isFixed} {...otherProps}>
     <Container>
       <Notes notes={ notes }/>
       <Refs refs={ refs }/>
