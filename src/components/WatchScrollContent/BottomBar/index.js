@@ -2,9 +2,14 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { size, palette } from 'styled-theme'
 import { ifProp } from 'styled-tools'
-import Container from '../../Container'
+import __Container from '../../Container'
+
 import Note from '../../Note' 
 import Ref from '../../Ref' 
+
+const Container = __Container.extend`
+  padding: ${ifProp('isFixed', '0 15', 0)}px;
+`
 
 const BottomBar = styled.div`
   ${ifProp('isVisible', css`
@@ -59,7 +64,7 @@ const Refs = ({ refs }) => (
 
 const ContentBottomBar = ({ isFixed, notes, refs, ...otherProps}) => (
   <BottomBar isFixed={isFixed} {...otherProps}>
-    <Container>
+    <Container isFixed={isFixed}>
       <Notes notes={ notes }/>
       <Refs refs={ refs }/>
     </Container>

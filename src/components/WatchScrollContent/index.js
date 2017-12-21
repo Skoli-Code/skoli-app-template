@@ -10,6 +10,7 @@ import { ifProp } from 'styled-tools'
 
 import BottomBar from './BottomBar'
 import NoteModal from '../NoteModal'
+import Container from '../Container'
 
 import { sleep } from '../../utils'
 
@@ -21,6 +22,8 @@ const ScrollWrapper = styled.div`
 const Content = styled.div`
   overflow: hidden;
 `
+
+const __isVisible = el => el.visible
 
 class WatchScrollContent extends Component {
   static childContextTypes = {
@@ -104,14 +107,15 @@ class WatchScrollContent extends Component {
   render(){
     const { children } = this.props
     const { isNoteModalOpen, noteModalContent, isDynamicBottomBarEnabled } = this.state
-    let notes = this.collection('notes')
-    let refs = this.collection('refs')
-    const isVisible = el => el.visible
-    const visibleNotes = notes.filter(isVisible)
-    const visibleRefs = refs.filter(isVisible)
-    const isDynamicBottomBarVisible = isDynamicBottomBarEnabled && (visibleNotes.length + visibleRefs.length) > 0
+    
+    const notes = this.collection('notes')
+    const refs = this.collection('refs')
+    const visibleNotes = notes.filter(__isVisible)
+    const visibleRefs = refs.filter(__isVisible)
 
-    console.log('isDynamicBottomBarVisible ?', isDynamicBottomBarVisible)
+    const isDynamicBottomBarVisible = isDynamicBottomBarEnabled && (
+      (visibleNotes.length + visibleRefs.length) > 0
+    )
 
     return (
       <ScrollWrapper isFixed={isDynamicBottomBarVisible}>
@@ -121,10 +125,12 @@ class WatchScrollContent extends Component {
             onEnter={() => this.disableFixedBar()}
             onLeave={() => this.enableFixedBar()}
           >
-          <BottomBar isVisible={true} isFixed={false} notes={notes} refs={refs} />
+            <BottomBar isVisible={true} isFixed={false} notes={notes} refs={refs} />
           </Waypoint>
         </Content>
-        <BottomBar isVisible={isDynamicBottomBarVisible} isFixed={true} notes={visibleNotes} refs={visibleRefs} />
+        <Container>
+          <BottomBar isVisible={isDynamicBottomBarVisible} isFixed={true} notes={visibleNotes} refs={visibleRefs} />
+        </Container>
         <NoteModal isOpen={isNoteModalOpen} content={noteModalContent}/>
       </ScrollWrapper>
     )
