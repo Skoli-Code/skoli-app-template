@@ -112,7 +112,7 @@ class WatchScrollContent extends Component {
     const refs = this.collection('refs')
     const visibleNotes = notes.filter(__isVisible)
     const visibleRefs = refs.filter(__isVisible)
-
+    const hasNotes = (notes.length + refs.length) > 0
     const isDynamicBottomBarVisible = isDynamicBottomBarEnabled && (
       (visibleNotes.length + visibleRefs.length) > 0
     )
@@ -125,7 +125,7 @@ class WatchScrollContent extends Component {
             onEnter={() => this.disableFixedBar()}
             onLeave={() => this.enableFixedBar()}
           >
-            <BottomBar isVisible={true} isFixed={false} notes={notes} refs={refs} />
+            { hasNotes && (<BottomBar isVisible={true} isFixed={false} notes={notes} refs={refs} />) }
           </Waypoint>
         </Content>
         <Container>
