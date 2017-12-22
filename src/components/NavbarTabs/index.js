@@ -15,6 +15,12 @@ const Tabs = styled.div`
   `}
 `
 
+const SocialTab = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+`
+
 const TabLink = Link.extend`
   color: white; 
   height: ${size('navbarHeight')};
@@ -60,7 +66,9 @@ const Tab = ({ to, text, icon:TabIcon, home=false }) => (
 const NavbarTabs = ({ tabs }) => (
   <Tabs>
     { tabs.map((tab,i) => <Tab key={`tab-${i}`} {...tab} /> )}
-    <SocialSharing />
+    <SocialTab>
+      <SocialSharing />
+    </SocialTab>
   </Tabs>
 )
 
