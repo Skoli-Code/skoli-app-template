@@ -1,9 +1,13 @@
 import canUseDom from 'can-use-dom'
-
 import AboutIcon from './icons/questionmark'
 import HomeIcon from './icons/home'
 
-export const DEFAULT_URL = 'http://skoli.fr'
+export const DEFAULT_URL = 'http://localhost:9000'
+
+export const baseURL = () => (
+  canUseDom ? `${location.protocol}//${location.host}` : DEFAULT_URL
+)
+
 export const getCurrentHref = () => (
   !canUseDom ? DEFAULT_URL : window.location.href
 )
@@ -14,10 +18,11 @@ const TWEET_VIA_ACCOUNT = ''
 const TWEET_TEXT = 'This is the text that will appear in the sharing tweet'
 
 export const SOCIAL = {
+  DEFAULT_IMAGE: 'default.jpg',
   TITLE: 'Skoli app template',
   DESCRIPTION: 'The base template for skoli application based on Gatsby',
   KEYWORDS: 'gatsby,html,template,react',
-  SHARE_URL: 'https://exodes-charnels.universite-lyon.fr/',
+  SHARE_URL: DEFAULT_URL,
   FACEBOOK: {
     APP_ID: '1666596323384667',
     SDK_VERSION: 'v2.10',
@@ -35,8 +40,6 @@ export const SOCIAL = {
     }
   }
 }
-
-
 
 export const NAVBAR_LINKS = [{
     home: true,

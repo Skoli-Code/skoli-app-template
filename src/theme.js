@@ -17,7 +17,10 @@ const theme = {
     mobileMaxWidth: '420px',
     tabletMaxWidth: '840px',
   },
-  coverBlur: 10
+  cover: {
+    blur: 10,
+    fontColor: '#5c636e',
+  }
 }
 
 export default theme

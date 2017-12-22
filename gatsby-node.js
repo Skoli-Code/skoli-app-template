@@ -28,9 +28,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         allMarkdownRemark {
           edges {
             node {
-              frontmatter {
-                layout
-              }
               fields {
                 slug
               }
@@ -49,12 +46,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
       // Create blog posts pages.
       result.data.allMarkdownRemark.edges.forEach(edge => {
-        const layoutName = edge.node.frontmatter.layout || 'index'
         const component = path.resolve(`${__dirname}/src/templates/markdown-page.js`)
         createPage({
           path: edge.node.fields.slug, // required
           component,
-          layout: layoutName,
           context: {
             slug: edge.node.fields.slug,
           },

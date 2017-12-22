@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Waypoint from 'react-waypoint'
+import canUseDom from 'can-use-dom'
 
 const watchElement = (Wrapped, {
   numbering = true,
@@ -52,13 +53,13 @@ const watchElement = (Wrapped, {
         id,
       }
       const element = <Wrapped watcher={watcher} {...props} />
-     
+      const ancestor = canUseDom ? window : null
       if (inBottomBar) {
         return element
       } else {
         return (
           <Waypoint 
-            scrollableAncestor={window}
+            scrollableAncestor={ancestor}
             onEnter={() => this.onEnter()}
             onLeave={() => this.onLeave()}
             topOffset={topOffset}

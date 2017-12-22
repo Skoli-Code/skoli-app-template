@@ -4,10 +4,10 @@ import Helmet from 'react-helmet'
 import styled, { ThemeProvider, injectGlobal } from 'styled-components'
 import { font, palette } from 'styled-theme'
 import Container from '../components/Container'
+import Meta from '../components/Meta'
 import { SOCIAL } from '../constants'
 import theme from '../theme'
 import './index.css'
-
 
 injectGlobal`
   html {
@@ -25,18 +25,12 @@ injectGlobal`
 const {
   TITLE,
   DESCRIPTION,
-  KEYWORDS
+  KEYWORDS,
+  DEFAULT_IMAGE
 } = SOCIAL
 
 const TemplateWrapper = ({ children }) => (
   <div>
-    <Helmet
-      title={ TITLE }
-      meta={[
-        { name: 'description', content: DESCRIPTION },
-        { name: 'keywords', content: KEYWORDS  },
-      ]}
-    />
     <ThemeProvider theme={theme}>
       {children()}
     </ThemeProvider>

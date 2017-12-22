@@ -7,6 +7,8 @@ import { size, palette } from 'styled-theme'
 import CloseIcon from '../../icons/xmark' 
 import Container from '../Container'
 
+import canUseDom from 'can-use-dom'
+
 const Holder = styled.div`
   position: fixed;
   top: 0;
@@ -40,7 +42,6 @@ const Content = styled.div`
   padding: 15px;
 `
 
-const modalRoot = document.getElementById('__modals')
 
 const StringOrNode = PropTypes.oneOfType([
   PropTypes.string,
@@ -60,15 +61,20 @@ class NoteModal extends Component {
   }  
   constructor(props){
     super(props)
-    this.el = document.createElement('div')
+    if(canUseDom){
+      this.el = document.createElement('div')
+    }
   }
-  
+  modalRoot(){
+    return document.getElementById('__modals') 
+  }
+
   componentDidMount(){
-    modalRoot.appendChild(this.el)
+    this.modalRoot().appendChild(this.el)
   }
   
   componentWillUnmount(){ 
-    modalRoot.removeChild(this.el)
+    this.modalRoot().removeChild(this.el)
   }
   
   close(){
@@ -76,6 +82,7 @@ class NoteModal extends Component {
   }
 
   render(){
+    if(!this.el){ return null; }
     const { isOpen, content } = this.props
     const modal = (
       <Holder isOpen={ isOpen }>

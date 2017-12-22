@@ -1,6 +1,6 @@
 ---
 title: "À propos"
-layout: index
+description: "This is a descripton set in content/about.md"
 ---
 # À Propos
 

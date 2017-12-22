@@ -1,6 +1,8 @@
 ---
 title: "Test visualization in markdown"
 description: "This page is dedicated to demo usage of a custom components (here a dataviz component) inside Markdown"
+image: "vis-in-md.jpg"
+keywords: "d3,gatsby,viz"
 ---
 Montius nos tumore inusitato quodam et novo ut rebellis et maiestati recalcitrantes Augustae per haec quae strepit incusat iratus nimirum quod contumacem praefectum, quid rerum ordo postulat ignorare dissimulantem formidine tenus iusserim custodiri.
 

@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { size } from 'styled-theme'
 import Container from '../components/Container'
 import Navbar from '../components/Navbar'
-import WatchScrollContent from '../components/WatchScrollContent' 
+import WatchScrollContent from '../components/WatchScrollContent'
+import BaseTemplate from './base'
 import { media } from '../styled-utils' 
 
 const Holder = styled.div``;
@@ -13,7 +14,7 @@ const ContentHolder = styled.div`
 `;
 
 const DefaultTemplate = ({ meta, children }) => (
-  <Holder>
+  <BaseTemplate meta={ meta }>
     <Navbar />
     <ContentHolder>
       <Container>
@@ -22,7 +23,7 @@ const DefaultTemplate = ({ meta, children }) => (
         </WatchScrollContent>
       </Container>
     </ContentHolder>
-  </Holder>
+  </BaseTemplate>
 )
 
 DefaultTemplate.propTypes = {

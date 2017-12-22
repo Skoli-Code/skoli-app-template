@@ -1,5 +1,5 @@
 import React from 'react'
-import DefaultTemplate from './page'
+import PageTemplate from './page'
 import HAST from '../components/renderHAST'
 
 import Note from '../components/Note'
@@ -13,12 +13,24 @@ const componentsMap = {
 }
 
 const Template = ({ data }) => {
-  const { hast } = data.markdownRemark
+  const {
+    hast,
+    frontmatter: {
+      title,
+      description,
+      keywords,
+      image
+    }
+  } = data.markdownRemark
   const props = { hast, componentsMap }
+  const meta = {
+    title, description, keywords, image
+  }
+  console.log('markdown-page', meta)
   return (
-    <DefaultTemplate>
+    <PageTemplate meta={ meta }>
       <HAST {...props} />
-    </DefaultTemplate>
+    </PageTemplate>
   )
 }
 
@@ -31,6 +43,9 @@ export const query = graphql`
       }
       frontmatter {
         title
+        description
+        image
+        keywords
       }
     }
   }
