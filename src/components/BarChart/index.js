@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import canUseDom from 'can-use-dom'
 import * as d3 from 'd3' 
 import styled from 'styled-components'
 import { prop } from 'styled-tools'
@@ -22,15 +22,46 @@ class Chart extends Component {
     const { yTitle } = this.props
     return el[l(yTitle)]
   }
+  
+  iprop(name){
+    return parseInt(this.props[name])
+  }
+  
+  __width(){
+    const width = this.iprop('width')
+    if(!this.__el){ return width; }
+    const pwidth = this.__el.parentElement.clientWidth
+    if (width > pwidth) {
+      return pwidth
+    }
+    return width
+  }
+
+  __height(){
+    const width = this.iprop('width')
+    const height = this.iprop('height')
+
+    const ratio = width / height
+
+    const w = this.__width()
+    if(width > w){
+      return height * ratio
+    }
+    return height
+  }
 
   width(){
-    const { width, marginLeft, marginRight } = this.props
-    return parseInt(width) - parseInt(marginLeft) - parseInt(marginRight)
+    const width = this.__width() 
+    const marginRight = this.iprop('marginRight')
+    const marginLeft = this.iprop('marginLeft')
+    return width - marginLeft - marginRight
   }
 
   height(){
-    const { height, marginBottom, marginTop } = this.props
-    return parseInt(height) - parseInt(marginBottom) - parseInt(marginTop)
+    const height = this.__height()
+    const marginTop = this.iprop('marginTop')
+    const marginBottom = this.iprop('marginBottom')
+    return height - marginBottom - marginTop
   }
   
   xScale(){
@@ -44,8 +75,13 @@ class Chart extends Component {
   }
   
   drawChart(ref){
-    const { height, yDivide, yUnit, yTitle, marginTop, marginLeft } = this.props
+    this.__el = ref
+    const { yDivide, yUnit, yTitle, marginTop, marginLeft } = this.props
     const $svg = d3.select(ref)
+    $svg
+      .attr('width', this.__width())
+      .attr('height', this.__height())
+
     const xScale = this.xScale()
     const yScale = this.yScale()
     const h = this.height()
