@@ -77,11 +77,16 @@ export const NAVBAR_LINKS = [
 ## Theme 
 This project is developed with the [styled-theme]() library to allow theming. Here are a summary of the theme's variables located under `src/theme.js`
 
-| `palette` | Color palette for the application | 
+| `palette` | Color palette for the application |
+| `fonts.primary` | Base font for the template |
+| `fonts.secondary` | Font used for titles |
 | `sizes.navbarHeight` | Height of the top's navigation bar |
-| `sizes.containerMaxWidth` | Height of the top's navigation bar |
+| `sizes.containerMaxWidth` | Width's of the main container |
 | `sizes.desktopMinWidth` | Breakpoint to detect desktop's width |
-| `coverBlur` | Set the blur size (in `px`) of the cover's image |
+| `sizes.mobileMinWidth` | Breakpoint to detect mobile's width |
+| `sizes.tabletMinWidth` | Breakpoint to detect tablet's width |
+| `cover.blur` | Set the blur size (in `px`) of the cover's image |
+| `cover.fontColor` | The color of the text displayed on cover |
 
 
 ## Components inside markdown
